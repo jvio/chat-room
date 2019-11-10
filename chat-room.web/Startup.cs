@@ -1,4 +1,3 @@
-using System.Data.Common;
 using chat_room.web.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -42,10 +41,16 @@ namespace chat_room.web
             // Tels middleware to use CORS policy, before endpoints configuration
             app.UseCors("CorsPolicy");
 
+            // Enables serve static files of ng
             app.UseStaticFiles();
             
+            // Displays swagger endpoints
+            app.UseSwagger(env);
+            
+            // Enables routing
             app.UseRouting();
 
+            // Defines endpoints
             app.UseEndpoints(endpoints =>
             {
                 // Hello world 
@@ -60,6 +65,19 @@ namespace chat_room.web
             
             // Creates db
             app.CreateDB(env);
+        }
+    }
+
+    public static class SwaggerExtensions
+    {
+        public static void UseSwagger(this IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying
+            // the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger.json", "chat-room");
+            });
         }
     }
 }

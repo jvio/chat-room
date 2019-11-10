@@ -1,0 +1,27 @@
+{
+  "name": "chat-room-swagger",
+  "version": "0.0.1",
+  "private": true,
+  "description": "New Swagger API Project",
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "serve-static": "^1.14.1",
+    "swagger-express-mw": "^0.7.0"
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1",
+    "should": "^13.2.3",
+    "supertest": "^4.0.2",
+    "swagger-markdown": "^1.2.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test": "swagger project test",
+    "edit": "swagger project edit",
+    "doc": "swagger-markdown api/swagger/swagger.yaml -o api/readme.md"
+  }
+}

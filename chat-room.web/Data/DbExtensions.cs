@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using chat_room.web.Data.Models;
 using chat_room.web.Models;
@@ -17,7 +16,7 @@ namespace chat_room.web.Data
             try
             {
                 var file = System.IO.Path.Combine(env.WebRootPath, "chat_room.sqlite");
-                ConnectionString = $"Filename={file}";
+                ConnectionString = $"Data Source={file}";
 
                 using (var context = new ChatRoomContext())
                 {
