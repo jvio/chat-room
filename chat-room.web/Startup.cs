@@ -1,15 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Data.Common;
+using chat_room.web.Data;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace ChatRoom.Web
+namespace chat_room.web
 {
     public class Startup
     {
@@ -45,18 +42,24 @@ namespace ChatRoom.Web
             // Tels middleware to use CORS policy, before endpoints configuration
             app.UseCors("CorsPolicy");
 
+            app.UseStaticFiles();
+            
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
+                // Hello world 
                 endpoints.MapGet("/", async context =>
                 {
                     await context.Response.WriteAsync("Hello World!");
                 });
                 
-                // Adding endpoint for chat room
+                // Adding endpoint for signalR chat room
                 endpoints.MapHub<ChatRoomHub>("chat-room");
             });
+            
+            // Creates db
+            app.CreateDB(env);
         }
     }
 }
