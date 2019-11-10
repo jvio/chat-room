@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.name = window.prompt('Name:', 'Javier');
 
-    this.hubConnection = new HubConnectionBuilder().withUrl('http://localhost:5200/chat-room').build();
+    this.hubConnection = new HubConnectionBuilder().withUrl(`${environment.api_path}chat-room`).build();
 
     this.hubConnection
       .start()
