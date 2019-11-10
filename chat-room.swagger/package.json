@@ -22,6 +22,6 @@
     "start": "node app.js",
     "test": "swagger project test",
     "edit": "swagger project edit",
-    "doc": "swagger-markdown api/swagger/swagger.yaml -o api/readme.md"
+    "doc": "swagger-markdown -i api/swagger/swagger.yaml -o api/readme.md"
   }
 }

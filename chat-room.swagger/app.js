@@ -27,7 +27,7 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
   // servers assets in case needed
   app.use(serveStatic('assets'));
 
-  if (swaggerExpress.runner.swagger.paths['/conversations']) {
-    console.log('try this:\ncurl http://127.0.0.1:' + port + '/conversations');
+  if (swaggerExpress.runner.swagger.paths['/hello']) {
+    console.log('try this:\ncurl http://127.0.0.1:' + port + '/hello?name=Scott');
   }
 });
