@@ -24,7 +24,7 @@
             "tsConfig": "tsconfig.app.json",
             "aot": false,
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "styles": ["src/styles/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -112,6 +112,15 @@
           "configurations": {
             "production": {
               "browserTarget": "chat-room:build:production"
+            },
+            "swagger": {
+              "browserTarget": "chat-room:build:swagger"
+            },
+            "mvc": {
+              "browserTarget": "chat-room:build:mvc"
+            },
+            "mvc-production": {
+              "browserTarget": "chat-room:build:mvc-production"
             }
           }
         },
@@ -129,7 +138,7 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "styles": ["src/styles/styles.scss"],
             "scripts": []
           }
         },
@@ -149,6 +158,15 @@
           "configurations": {
             "production": {
               "devServerTarget": "chat-room:serve:production"
+            },
+            "swagger": {
+              "devServerTarget": "chat-room:build:swagger"
+            },
+            "mvc": {
+              "devServerTarget": "chat-room:build:mvc"
+            },
+            "mvc-production": {
+              "devServerTarget": "chat-room:build:mvc-production"
             }
           }
         }

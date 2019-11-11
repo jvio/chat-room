@@ -1,0 +1,11 @@
+@import '~bootstrap/scss/functions';
+
+// Variables
+
+$blue: #4b2bbb;
+$red: #d44cf5;
+$green: #204ad1;
+$yellow: #ecc387;
+
+// Import needs to happen at end
+@import '~bootstrap/scss/variables';

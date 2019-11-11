@@ -1,2 +1,32 @@
-<p>main works!</p>
-<router-outlet></router-outlet>
+<div class="d-flex flex-column"></div>
+
+<header class="d-flex border-bottom">
+  <div class="px-5 py-4">
+    Logo
+  </div>
+  <div class="flex-grow-1 p-4">
+    <input />
+  </div>
+  <a routerLink="profile" class="p-4 border-left">
+    My Profile
+  </a>
+  <a routerLink="signout" class="p-4 border-left">
+    Sing out
+  </a>
+</header>
+
+<main class="d-flex flex-grow-1">
+  <div class="d-flex flex-column nav">
+    <a routerLink="schedule" routerLinkActive="active" class="px-5 py-4">Schedule</a>
+    <a routerLink="chat-room" routerLinkActive="active" class="px-5 py-4">Facility</a>
+    <a routerLink="lab" routerLinkActive="active" class="px-5 py-4">Lab</a>
+    <a routerLink="protocol" routerLinkActive="active" class="px-5 py-4">Protocol</a>
+  </div>
+  <div class="d-flex flex-column flex-grow-1 main">
+    <router-outlet></router-outlet>
+  </div>
+</main>
+
+<footer class="text-center">
+  Built with love by javier villarreal
+</footer>

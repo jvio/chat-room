@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+@import './bootstrap/bootstrap';
+
+html {
+  height: 100%;
+}
+
+html,
+body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}

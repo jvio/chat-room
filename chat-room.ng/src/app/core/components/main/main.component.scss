@@ -1,0 +1,25 @@
+@import '../../../../styles/bootstrap/variables';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+a {
+  color: $gray-700;
+}
+
+.nav {
+  a {
+    color: $gray-500;
+    &.active {
+      color: $black;
+      font-weight: bold;
+    }
+  }
+}
+
+.main {
+  background-color: #e2e3ee;
+}
