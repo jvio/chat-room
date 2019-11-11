@@ -1,1 +1,7 @@
-<p>chat works!</p>
+<div *ngIf="conversation$ | async as conversation">
+  <div>
+    <div *ngFor="let user of conversation.users">
+      <app-avatar [user]="users[user]"></app-avatar>
+    </div>
+  </div>
+</div>

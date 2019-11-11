@@ -191,6 +191,7 @@ paths:
           description: 'Validation exception'
       security: []
   /conversations/{conversationId}:
+    x-swagger-router-controller: conversations
     get:
       tags:
         - 'conversation'

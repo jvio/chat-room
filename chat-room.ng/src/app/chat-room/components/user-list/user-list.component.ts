@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class UserListComponent implements OnInit {
   users: { [userId: number]: User };
-  conversations: Observable<Conversation[]>;
+  conversations$: Observable<Conversation[]>;
 
   usersTypeForm: FormGroup;
   UserTypes = UsersTypes;
@@ -22,7 +22,7 @@ export class UserListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.conversations = this.conversationService.getConversations();
+    this.conversations$ = this.conversationService.getConversations();
 
     this.userService.getUsers().subscribe(users => {
       this.users = {};

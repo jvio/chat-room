@@ -10,25 +10,28 @@
     </div>
   </form>
   <div class="mt-4">
-    <div *ngFor="let conversation of conversations | async" class="bg-white mt-2 shadow-sm conversation">
-      <div *ngIf="conversation.messages[conversation.messages.length - 1] as message" class="px-3 py-3">
-        <div *ngIf="users[message.userId] as user" class="d-flex">
-          <div class="rounded-circle shadow-sm avatar text-center">
-            <h3 class="text-uppercase text-primary py-2">
-              <span>{{ user.firstName[0] }}</span>
-              <span>{{ user.lastName[0] }}</span>
-            </h3>
-          </div>
+    <div *ngFor="let conversation of conversations$ | async" class="mt-2 conversation">
+      <div *ngIf="conversation.messages[conversation.messages.length - 1] as message">
+        <a
+          [routerLink]="'' + conversation.conversationId"
+          routerLinkActive="active shadow-lg"
+          *ngIf="users[message.userId] as user"
+          class="d-flex px-3 py-4 shadow-sm bg-white"
+        >
+          <app-avatar [user]="user"></app-avatar>
           <div class="flex-grow-1 ml-3">
-            <h5>
-              <span class="text-capitalize">{{ user.firstName }} </span>
-              <span class="text-capitalize">{{ user.lastName }}</span>
-            </h5>
+            <div class="d-flex">
+              <h5 class="flex-grow-1">
+                <span class="text-capitalize">{{ user.firstName }} </span>
+                <span class="text-capitalize">{{ user.lastName }}</span>
+              </h5>
+              <div class="text-muted small">{{ message.sentDate | date }}</div>
+            </div>
             <p>
               {{ message.content }}
             </p>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </div>

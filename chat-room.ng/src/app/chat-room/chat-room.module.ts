@@ -9,9 +9,10 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { NgbButtonsModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { AvatarComponent } from './components/avatar/avatar.component';
 
 @NgModule({
-  declarations: [ChatRoomComponent, ChatComponent, UserDetailComponent, UserListComponent],
+  declarations: [ChatRoomComponent, ChatComponent, UserDetailComponent, UserListComponent, AvatarComponent],
   imports: [ReactiveFormsModule, AngularFontAwesomeModule, NgbButtonsModule, CommonModule, ChatRoomRoutingModule]
 })
 export class ChatRoomModule {}
