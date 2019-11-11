@@ -1,12 +1,27 @@
+using System;
 using System.Collections.Generic;
 
 namespace chat_room.web.Data.Models
 {
     public class User
     {
-        public int UserId { get; set; }
+        public long UserId { get; set; }
         
-        public string Name { get; set; }
+        public string Username { get; set; }
+        
+        public string Password { get; set; }
+        
+        public string FirstName { get; set; }
+        
+        public string LastName { get; set; }
+        
+        public string Email { get; set; }
+        
+        public string Phone { get; set; }
+        
+        public int Age { get; set; }
+        
+        public string Blood { get; set; }
         
         public bool IsDoctor { get; set; }
         
@@ -15,16 +30,16 @@ namespace chat_room.web.Data.Models
     
     public class UserConversation
     {
-        public int UserId { get; set; }
+        public long UserId { get; set; }
         public User User { get; set; }
         
-        public int ConversationId { get; set; }
+        public long ConversationId { get; set; }
         public Conversation Conversation { get; set; }
     }
 
     public class Conversation
     {
-        public int ConversationId { get; set; }
+        public long ConversationId { get; set; }
         
         public List<Message> Messages { get; } = new List<Message>();
         
@@ -33,14 +48,16 @@ namespace chat_room.web.Data.Models
 
     public class Message
     {
-        public int MessageId { get; set; }
+        public long MessageId { get; set; }
 
         public string Content { get; set; }
+        
+        public DateTime SentDate { get; set; }
 
-        public int ConversationId { get; set; }
+        public long ConversationId { get; set; }
         public Conversation Conversation { get; set; }
 
-        public int UserId { get; set; }
+        public long UserId { get; set; }
         public User User { get; set; }
     }
 }

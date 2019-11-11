@@ -1,4 +1,7 @@
 using chat_room.web.Data;
+using chat_room.web.Data.Extensions;
+using chat_room.web.Hubs;
+using chat_room.web.Swagger.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -28,10 +31,22 @@ namespace chat_room.web
             
             // Adding signalR services
             services.AddSignalR();
+            
+            // Adding db context
+            services.AddDbContext<ChatRoomContext>();
+            
+            // Adding api
+            services.AddControllers();
+            
+            // Adding cache
+            services.AddDistributedMemoryCache();
+            
+            // Adding session
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ChatRoomContext db)
         {
             if (env.IsDevelopment())
             {
@@ -43,6 +58,9 @@ namespace chat_room.web
 
             // Enables serve static files of ng
             app.UseStaticFiles();
+
+            // Enables session
+            app.UseSession();
             
             // Displays swagger endpoints
             app.UseSwagger(env);
@@ -61,23 +79,13 @@ namespace chat_room.web
                 
                 // Adding endpoint for signalR chat room
                 endpoints.MapHub<ChatRoomHub>("chat-room");
+                
+                // Adding Api
+                endpoints.MapControllers();
             });
             
             // Creates db
-            app.CreateDB(env);
-        }
-    }
-
-    public static class SwaggerExtensions
-    {
-        public static void UseSwagger(this IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying
-            // the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger.json", "chat-room");
-            });
+            app.CreateDB(env, db);
         }
     }
 }

@@ -1,8 +1,8 @@
-using chat_room.web.Data;
+using chat_room.web.Data.Extensions;
 using chat_room.web.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace chat_room.web.Models
+namespace chat_room.web.Data
 {
     public class ChatRoomContext : DbContext
     {

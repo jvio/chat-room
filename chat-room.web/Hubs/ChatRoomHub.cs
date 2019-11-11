@@ -1,8 +1,8 @@
+using chat_room.web.Data;
 using chat_room.web.Data.Models;
-using chat_room.web.Models;
 using Microsoft.AspNetCore.SignalR;
 
-namespace chat_room.web
+namespace chat_room.web.Hubs
 {
     public class ChatRoomHub: Hub
     {
@@ -23,7 +23,7 @@ namespace chat_room.web
 
             if (user != null)
             {
-                Clients.All.SendAsync("sendToAll", user.Name, "Hello there!");
+                Clients.All.SendAsync("sendToAll", user.FirstName, "Hello there!");
             }
         }
     }
