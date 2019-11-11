@@ -22,6 +22,7 @@
     "start": "node app.js",
     "test": "swagger project test",
     "edit": "swagger project edit",
-    "doc": "swagger-markdown -i api/swagger/swagger.yaml -o api/readme.md"
+    "doc": "swagger-markdown -i api/swagger/swagger.yaml -o api/readme.md",
+    "gen:ng": "java -jar ../chat-room.codegen/openapi-generator-cli-4.2.0.jar generate -i api/swagger/swagger.yaml -g typescript-angular -o ../chat-room.ng/src/app/api -c openapi-config.json"
   }
 }

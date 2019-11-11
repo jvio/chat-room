@@ -28,6 +28,16 @@ npm start
 npm run test
 ```
 
+## Generators
+
+### Swagger
+
+https://github.com/swagger-api/swagger-codegen/wiki/FAQ
+
+### Open Api
+
+#### Downloads
+http://central.maven.org/maven2/org/openapitools/openapi-generator-cli/
 
 ## Note
 
