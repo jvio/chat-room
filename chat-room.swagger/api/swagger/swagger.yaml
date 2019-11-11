@@ -1,12 +1,12 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: "1.0.0"
-  title: "Swagger Chat-Room"
+  version: '1.0.0'
+  title: 'Swagger Chat-Room'
 # during dev, should point to your local machine
 host: localhost:10010
-# basePath prefixes all resource paths 
+# basePath prefixes all resource paths
 basePath: /
-# 
+#
 schemes:
   # tip: remove http to make production-grade
   - http
@@ -19,12 +19,12 @@ produces:
   - application/json
 # tags
 tags:
-  - name: "message"
-    description: "Messages"
-  - name: "conversation"
-    description: "Conversations"
-  - name: "user"
-    description: "Operations about user"
+  - name: 'message'
+    description: 'Messages'
+  - name: 'conversation'
+    description: 'Conversations'
+  - name: 'user'
+    description: 'Operations about user'
 paths:
   /hello:
     # binds a127 app logic to a route
@@ -40,314 +40,337 @@ paths:
           required: false
           type: string
       responses:
-        "200":
+        '200':
           description: Success
           schema:
             # a pointer to a definition
-            $ref: "#/definitions/HelloWorldResponse"
+            $ref: '#/definitions/HelloWorldResponse'
         # responses may fall through to errors
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
-  /message:
+            $ref: '#/definitions/ErrorResponse'
+  /messages:
     post:
       tags:
-        - "message"
-      summary: "Add a new message to the conversation"
-      description: ""
-      operationId: "addMessage"
+        - 'message'
+      summary: 'Add a new message to the conversation'
+      description: ''
+      operationId: 'addMessage'
       parameters:
-        - in: "body"
-          name: "body"
-          description: "Message object that needs to be added to the conversation"
+        - in: 'body'
+          name: 'body'
+          description: 'Message object that needs to be added to the conversation'
           required: true
           schema:
-            $ref: "#/definitions/Message"
+            $ref: '#/definitions/Message'
       responses:
         405:
-          description: "Invalid input"
+          description: 'Invalid input'
       security: []
     put:
       tags:
-        - "message"
-      summary: "Update an existing message"
-      description: ""
-      operationId: "updateMessage"
+        - 'message'
+      summary: 'Update an existing message'
+      description: ''
+      operationId: 'updateMessage'
       parameters:
-        - in: "body"
-          name: "body"
-          description: "Message object that needs to be updated to the conversation"
+        - in: 'body'
+          name: 'body'
+          description: 'Message object that needs to be updated to the conversation'
           required: true
           schema:
-            $ref: "#/definitions/Message"
+            $ref: '#/definitions/Message'
       responses:
         400:
-          description: "Invalid ID supplied"
+          description: 'Invalid ID supplied'
         404:
-          description: "Message not found"
+          description: 'Message not found'
         405:
-          description: "Validation exception"
+          description: 'Validation exception'
       security: []
-  /message/{messageId}:
+  /messages/{messageId}:
     get:
       tags:
-        - "message"
-      summary: "Find message by ID"
-      description: "Returns a single message"
-      operationId: "getMessageById"
+        - 'message'
+      summary: 'Find message by ID'
+      description: 'Returns a single message'
+      operationId: 'getMessageById'
       parameters:
-        - name: "messageId"
-          in: "path"
-          description: "Id of message to return"
+        - name: 'messageId'
+          in: 'path'
+          description: 'Id of message to return'
           required: true
-          type: "integer"
-          format: "int64"
+          type: 'integer'
+          format: 'int64'
       responses:
         200:
-          description: "successful operation"
+          description: 'successful operation'
           schema:
-            $ref: "#/definitions/Message"
+            $ref: '#/definitions/Message'
         400:
-          description: "Invalid ID supplied"
+          description: 'Invalid ID supplied'
         404:
-          description: "Message not found"
+          description: 'Message not found'
       security: []
     delete:
       tags:
-        - "message"
-      summary: "Deletes a message"
-      description: ""
-      operationId: "deleteMessage"
+        - 'message'
+      summary: 'Deletes a message'
+      description: ''
+      operationId: 'deleteMessage'
       parameters:
-        - name: "messageId"
-          in: "path"
-          description: "Message id to delete"
+        - name: 'messageId'
+          in: 'path'
+          description: 'Message id to delete'
           required: true
-          type: "integer"
-          format: "int64"
+          type: 'integer'
+          format: 'int64'
       responses:
         400:
-          description: "Invalid ID supplied"
+          description: 'Invalid ID supplied'
         404:
-          description: "Message not found"
+          description: 'Message not found'
       security: []
-  /conversation:
+  /conversations:
+    x-swagger-router-controller: conversations
     get:
       tags:
-        - "conversation"
-      summary: "Get conversations"
-      description: "Returns all conversations"
-      operationId: "getConversations"
+        - 'conversation'
+      summary: 'Get conversations'
+      description: 'Returns all conversations'
+      operationId: 'getConversations'
       responses:
         200:
-          description: "successful operation"
+          description: 'successful operation'
           schema:
-            $ref: "#/definitions/Conversations"
+            type: array
+            items:
+              $ref: '#/definitions/Conversation'
         400:
-          description: "Invalid ID supplied"
+          description: 'Invalid ID supplied'
         404:
-          description: "Message not found"
+          description: 'Message not found'
       security: []
     post:
       tags:
-        - "conversation"
-      summary: "Add a new conversation"
-      description: ""
-      operationId: "addConversation"
+        - 'conversation'
+      summary: 'Add a new conversation'
+      description: ''
+      operationId: 'addConversation'
       parameters:
-        - in: "body"
-          name: "body"
-          description: "Conversation object that needs to be added"
+        - in: 'body'
+          name: 'body'
+          description: 'Conversation object that needs to be added'
           required: true
           schema:
-            $ref: "#/definitions/Conversation"
+            $ref: '#/definitions/Conversation'
       responses:
         405:
-          description: "Invalid input"
+          description: 'Invalid input'
       security: []
     put:
       tags:
-        - "conversation"
-      summary: "Update an existing conversation"
-      description: ""
-      operationId: "updateConversation"
+        - 'conversation'
+      summary: 'Update an existing conversation'
+      description: ''
+      operationId: 'updateConversation'
       parameters:
-        - in: "body"
-          name: "body"
-          description: "Conversation object that needs to be updated"
+        - in: 'body'
+          name: 'body'
+          description: 'Conversation object that needs to be updated'
           required: true
           schema:
-            $ref: "#/definitions/Conversation"
+            $ref: '#/definitions/Conversation'
       responses:
         400:
-          description: "Invalid ID supplied"
+          description: 'Invalid ID supplied'
         404:
-          description: "Conversation not found"
+          description: 'Conversation not found'
         405:
-          description: "Validation exception"
+          description: 'Validation exception'
       security: []
-  /conversation/{conversationId}:
+  /conversations/{conversationId}:
     get:
       tags:
-        - "conversation"
-      summary: "Find conversation by ID"
-      description: "Returns a single conversation"
-      operationId: "getConversationById"
+        - 'conversation'
+      summary: 'Find conversation by ID'
+      description: 'Returns a single conversation'
+      operationId: 'getConversationById'
       parameters:
-        - name: "conversationId"
-          in: "path"
-          description: "Id of conversation to return"
+        - name: 'conversationId'
+          in: 'path'
+          description: 'Id of conversation to return'
           required: true
-          type: "integer"
-          format: "int64"
+          type: 'integer'
+          format: 'int64'
       responses:
         200:
-          description: "successful operation"
+          description: 'successful operation'
           schema:
-            $ref: "#/definitions/Conversation"
+            $ref: '#/definitions/Conversation'
         400:
-          description: "Invalid ID supplied"
+          description: 'Invalid ID supplied'
         404:
-          description: "Message not found"
+          description: 'Message not found'
       security: []
     delete:
       tags:
-        - "conversation"
-      summary: "Deletes a conversation"
-      description: ""
-      operationId: "deleteConversation"
+        - 'conversation'
+      summary: 'Deletes a conversation'
+      description: ''
+      operationId: 'deleteConversation'
       produces:
-        - "application/xml"
-        - "application/json"
+        - 'application/xml'
+        - 'application/json'
       parameters:
-        - name: "conversationId"
-          in: "path"
-          description: "Conversation id to delete"
+        - name: 'conversationId'
+          in: 'path'
+          description: 'Conversation id to delete'
           required: true
-          type: "integer"
-          format: "int64"
+          type: 'integer'
+          format: 'int64'
       responses:
         400:
-          description: "Invalid ID supplied"
+          description: 'Invalid ID supplied'
         404:
-          description: "Message not found"
+          description: 'Message not found'
       security: []
-  /user:
+  /users:
+    x-swagger-router-controller: users
+    get:
+      tags:
+        - 'user'
+      summary: 'Get users'
+      description: 'Returns all users'
+      operationId: 'getUsers'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+        400:
+          description: 'Invalid ID supplied'
+        404:
+          description: 'Message not found'
+      security: []
     post:
       tags:
-        - "user"
-      summary: "Create user"
-      description: "This can only be done by the logged in user."
-      operationId: "createUser"
+        - 'user'
+      summary: 'Create user'
+      description: 'This can only be done by the logged in user.'
+      operationId: 'createUser'
       parameters:
-        - in: "body"
-          name: "body"
-          description: "Created user object"
+        - in: 'body'
+          name: 'body'
+          description: 'Created user object'
           required: true
           schema:
-            $ref: "#/definitions/User"
+            $ref: '#/definitions/User'
       responses:
         default:
-          description: "successful operation"
-  /user/login:
+          description: 'successful operation'
+  /users/login:
     get:
       tags:
-        - "user"
-      summary: "Logs user into the system"
-      description: ""
-      operationId: "loginUser"
+        - 'user'
+      summary: 'Logs user into the system'
+      description: ''
+      operationId: 'loginUser'
       parameters:
-        - name: "username"
-          in: "query"
-          description: "The user name for login"
+        - name: 'username'
+          in: 'query'
+          description: 'The user name for login'
           required: true
-          type: "string"
-        - name: "password"
-          in: "query"
-          description: "The password for login in clear text"
+          type: 'string'
+        - name: 'password'
+          in: 'query'
+          description: 'The password for login in clear text'
           required: true
-          type: "string"
+          type: 'string'
       responses:
         200:
-          description: "successful operation"
+          description: 'successful operation'
         400:
-          description: "Invalid username/password supplied"
-  /user/logout:
+          description: 'Invalid username/password supplied'
+  /users/logout:
     get:
       tags:
-        - "user"
-      summary: "Logs out current logged in user session"
-      description: ""
-      operationId: "logoutUser"
+        - 'user'
+      summary: 'Logs out current logged in user session'
+      description: ''
+      operationId: 'logoutUser'
       parameters: []
       responses:
         default:
-          description: "successful operation"
-  /user/{username}:
+          description: 'successful operation'
+  /users/{username}:
     get:
       tags:
-        - "user"
-      summary: "Get user by user name"
-      description: ""
-      operationId: "getUserByName"
+        - 'user'
+      summary: 'Get user by user name'
+      description: ''
+      operationId: 'getUserByName'
       parameters:
-        - name: "username"
-          in: "path"
-          description: "The name that needs to be fetched. Use user1 for testing. "
+        - name: 'username'
+          in: 'path'
+          description: 'The name that needs to be fetched. Use user1 for testing. '
           required: true
-          type: "string"
+          type: 'string'
       responses:
         200:
-          description: "successful operation"
+          description: 'successful operation'
           schema:
-            $ref: "#/definitions/User"
+            $ref: '#/definitions/User'
         400:
-          description: "Invalid username supplied"
+          description: 'Invalid username supplied'
         404:
-          description: "User not found"
+          description: 'User not found'
     put:
       tags:
-        - "user"
-      summary: "Updated user"
-      description: "This can only be done by the logged in user."
-      operationId: "updateUser"
+        - 'user'
+      summary: 'Updated user'
+      description: 'This can only be done by the logged in user.'
+      operationId: 'updateUser'
       parameters:
-        - name: "username"
-          in: "path"
-          description: "name that need to be updated"
+        - name: 'username'
+          in: 'path'
+          description: 'name that need to be updated'
           required: true
-          type: "string"
-        - in: "body"
-          name: "body"
-          description: "Updated user object"
+          type: 'string'
+        - in: 'body'
+          name: 'body'
+          description: 'Updated user object'
           required: true
           schema:
-            $ref: "#/definitions/User"
+            $ref: '#/definitions/User'
       responses:
         400:
-          description: "Invalid user supplied"
+          description: 'Invalid user supplied'
         404:
-          description: "User not found"
+          description: 'User not found'
     delete:
       tags:
-        - "user"
-      summary: "Delete user"
-      description: "This can only be done by the logged in user."
-      operationId: "deleteUser"
+        - 'user'
+      summary: 'Delete user'
+      description: 'This can only be done by the logged in user.'
+      operationId: 'deleteUser'
       parameters:
-        - name: "username"
-          in: "path"
-          description: "The name that needs to be deleted"
+        - name: 'username'
+          in: 'path'
+          description: 'The name that needs to be deleted'
           required: true
-          type: "string"
+          type: 'string'
       responses:
         400:
-          description: "Invalid username supplied"
+          description: 'Invalid username supplied'
         404:
-          description: "User not found"
+          description: 'User not found'
   /swagger:
     x-swagger-pipe: swagger_raw
+
 # complex objects have schema definitions
 definitions:
   HelloWorldResponse:
@@ -357,78 +380,74 @@ definitions:
       message:
         type: string
   ErrorResponse:
-    required:
-      - message
     properties:
       message:
         type: string
   Message:
-    type: "object"
+    type: 'object'
     properties:
       messageId:
-        type: "integer"
-        format: "int64"
+        type: 'integer'
+        format: 'int64'
       userId:
-        type: "integer"
-        format: "int64"
+        type: 'integer'
+        format: 'int64'
       content:
-        type: "string"
+        type: 'string'
       sentDate:
-        type: "string"
-        format: "date-time"
+        type: 'string'
+        format: 'date-time'
   Conversation:
-    type: "object"
+    type: 'object'
     properties:
       conversationId:
-        type: "integer"
-        format: "int64"
-      userIds:
-        type: "array"
+        type: 'integer'
+        format: 'int64'
+      users:
+        type: 'array'
         items:
-          type: "integer"
-          format: "int64"
-  Conversations:
-    properties:
-      conversations:
-        type: array
+          type: 'integer'
+          format: 'int64'
+      messages:
+        type: 'array'
         items:
-          $ref: '#/definitions/Conversation'
+          $ref: '#/definitions/Message'
   User:
-    type: "object"
+    type: 'object'
     required:
-      - "username"
+      - 'username'
     properties:
       userId:
-        type: "integer"
-        format: "int64"
+        type: 'integer'
+        format: 'int64'
       username:
-        type: "string"
+        type: 'string'
       firstName:
-        type: "string"
+        type: 'string'
       lastName:
-        type: "string"
+        type: 'string'
       email:
-        type: "string"
+        type: 'string'
       password:
-        type: "string"
+        type: 'string'
       phone:
-        type: "string"
+        type: 'string'
       isDoctor:
-        type: "boolean"
+        type: 'boolean'
         default: false
       age:
-        type: "integer"
-        format: "int32"
+        type: 'integer'
+        format: 'int32'
       blood:
-        type: "string"
+        type: 'string'
       userStatus:
-        type: "string"
-        description: "User Status"
+        type: 'string'
+        description: 'User Status'
         enum:
-          - "online"
-          - "offline"
+          - 'online'
+          - 'offline'
     xml:
-      name: "User"
+      name: 'User'
 externalDocs:
-  description: "Find out more about Swagger"
-  url: "http://swagger.io"
+  description: 'Find out more about Swagger'
+  url: 'http://swagger.io'

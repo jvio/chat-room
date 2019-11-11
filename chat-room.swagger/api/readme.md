@@ -1,80 +1,82 @@
 # Swagger Chat-Room
+
 ## Version: 1.0.0
 
 [Find out more about Swagger](http://swagger.io)
+
 ### /hello
 
 #### GET
+
 ##### Description:
 
 Returns 'Hello' to the caller
 
 ##### Parameters
 
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| name | query | The name of the person to whom to say hello | No | string |
+| Name | Located in | Description                                 | Required | Schema |
+| ---- | ---------- | ------------------------------------------- | -------- | ------ |
+| name | query      | The name of the person to whom to say hello | No       | string |
 
 ##### Responses
 
-| Code | Description | Schema |
-| ---- | ----------- | ------ |
-| 200 | Success | [HelloWorldResponse](#helloworldresponse) |
-| default | Error | [ErrorResponse](#errorresponse) |
+| Code    | Description | Schema                                    |
+| ------- | ----------- | ----------------------------------------- |
+| 200     | Success     | [HelloWorldResponse](#helloworldresponse) |
+| default | Error       | [ErrorResponse](#errorresponse)           |
 
-### /message
+### /messages
 
 #### POST
+
 ##### Summary:
 
 Add a new message to the conversation
 
 ##### Description:
 
-
-
 ##### Parameters
 
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| body | body | Message object that needs to be added to the conversation | Yes | [Message](#message) |
+| Name | Located in | Description                                               | Required | Schema              |
+| ---- | ---------- | --------------------------------------------------------- | -------- | ------------------- |
+| body | body       | Message object that needs to be added to the conversation | Yes      | [Message](#message) |
 
 ##### Responses
 
-| Code | Description |
-| ---- | ----------- |
-| 405 | Invalid input |
+| Code | Description   |
+| ---- | ------------- |
+| 405  | Invalid input |
 
 null
 
 #### PUT
+
 ##### Summary:
 
 Update an existing message
 
 ##### Description:
 
-
-
 ##### Parameters
 
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| body | body | Message object that needs to be updated to the conversation | Yes | [Message](#message) |
+| Name | Located in | Description                                                 | Required | Schema              |
+| ---- | ---------- | ----------------------------------------------------------- | -------- | ------------------- |
+| body | body       | Message object that needs to be updated to the conversation | Yes      | [Message](#message) |
 
 ##### Responses
 
-| Code | Description |
-| ---- | ----------- |
-| 400 | Invalid ID supplied |
-| 404 | Message not found |
-| 405 | Validation exception |
+| Code | Description          |
+| ---- | -------------------- |
+| 400  | Invalid ID supplied  |
+| 404  | Message not found    |
+| 405  | Validation exception |
 
 null
 
-### /message/{messageId}
+### /messages/{messageId}
 
 #### GET
+
 ##### Summary:
 
 Find message by ID
@@ -85,47 +87,47 @@ Returns a single message
 
 ##### Parameters
 
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| messageId | path | Id of message to return | Yes | long |
+| Name      | Located in | Description             | Required | Schema |
+| --------- | ---------- | ----------------------- | -------- | ------ |
+| messageId | path       | Id of message to return | Yes      | long   |
 
 ##### Responses
 
-| Code | Description | Schema |
-| ---- | ----------- | ------ |
-| 200 | successful operation | [Message](#message) |
-| 400 | Invalid ID supplied |  |
-| 404 | Message not found |  |
+| Code | Description          | Schema              |
+| ---- | -------------------- | ------------------- |
+| 200  | successful operation | [Message](#message) |
+| 400  | Invalid ID supplied  |                     |
+| 404  | Message not found    |                     |
 
 null
 
 #### DELETE
+
 ##### Summary:
 
 Deletes a message
 
 ##### Description:
 
-
-
 ##### Parameters
 
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| messageId | path | Message id to delete | Yes | long |
+| Name      | Located in | Description          | Required | Schema |
+| --------- | ---------- | -------------------- | -------- | ------ |
+| messageId | path       | Message id to delete | Yes      | long   |
 
 ##### Responses
 
-| Code | Description |
-| ---- | ----------- |
-| 400 | Invalid ID supplied |
-| 404 | Message not found |
+| Code | Description         |
+| ---- | ------------------- |
+| 400  | Invalid ID supplied |
+| 404  | Message not found   |
 
 null
 
-### /conversation
+### /conversations
 
 #### GET
+
 ##### Summary:
 
 Get conversations
@@ -136,65 +138,64 @@ Returns all conversations
 
 ##### Responses
 
-| Code | Description | Schema |
-| ---- | ----------- | ------ |
-| 200 | successful operation | [Conversations](#conversations) |
-| 400 | Invalid ID supplied |  |
-| 404 | Message not found |  |
+| Code | Description          | Schema                            |
+| ---- | -------------------- | --------------------------------- |
+| 200  | successful operation | [ [Conversation](#conversation) ] |
+| 400  | Invalid ID supplied  |                                   |
+| 404  | Message not found    |                                   |
 
 null
 
 #### POST
+
 ##### Summary:
 
 Add a new conversation
 
 ##### Description:
 
-
-
 ##### Parameters
 
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| body | body | Conversation object that needs to be added | Yes | [Conversation](#conversation) |
+| Name | Located in | Description                                | Required | Schema                        |
+| ---- | ---------- | ------------------------------------------ | -------- | ----------------------------- |
+| body | body       | Conversation object that needs to be added | Yes      | [Conversation](#conversation) |
 
 ##### Responses
 
-| Code | Description |
-| ---- | ----------- |
-| 405 | Invalid input |
+| Code | Description   |
+| ---- | ------------- |
+| 405  | Invalid input |
 
 null
 
 #### PUT
+
 ##### Summary:
 
 Update an existing conversation
 
 ##### Description:
 
-
-
 ##### Parameters
 
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| body | body | Conversation object that needs to be updated | Yes | [Conversation](#conversation) |
+| Name | Located in | Description                                  | Required | Schema                        |
+| ---- | ---------- | -------------------------------------------- | -------- | ----------------------------- |
+| body | body       | Conversation object that needs to be updated | Yes      | [Conversation](#conversation) |
 
 ##### Responses
 
-| Code | Description |
-| ---- | ----------- |
-| 400 | Invalid ID supplied |
-| 404 | Conversation not found |
-| 405 | Validation exception |
+| Code | Description            |
+| ---- | ---------------------- |
+| 400  | Invalid ID supplied    |
+| 404  | Conversation not found |
+| 405  | Validation exception   |
 
 null
 
-### /conversation/{conversationId}
+### /conversations/{conversationId}
 
 #### GET
+
 ##### Summary:
 
 Find conversation by ID
@@ -205,47 +206,67 @@ Returns a single conversation
 
 ##### Parameters
 
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| conversationId | path | Id of conversation to return | Yes | long |
+| Name           | Located in | Description                  | Required | Schema |
+| -------------- | ---------- | ---------------------------- | -------- | ------ |
+| conversationId | path       | Id of conversation to return | Yes      | long   |
 
 ##### Responses
 
-| Code | Description | Schema |
-| ---- | ----------- | ------ |
-| 200 | successful operation | [Conversation](#conversation) |
-| 400 | Invalid ID supplied |  |
-| 404 | Message not found |  |
+| Code | Description          | Schema                        |
+| ---- | -------------------- | ----------------------------- |
+| 200  | successful operation | [Conversation](#conversation) |
+| 400  | Invalid ID supplied  |                               |
+| 404  | Message not found    |                               |
 
 null
 
 #### DELETE
+
 ##### Summary:
 
 Deletes a conversation
 
 ##### Description:
 
-
-
 ##### Parameters
 
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| conversationId | path | Conversation id to delete | Yes | long |
+| Name           | Located in | Description               | Required | Schema |
+| -------------- | ---------- | ------------------------- | -------- | ------ |
+| conversationId | path       | Conversation id to delete | Yes      | long   |
 
 ##### Responses
 
-| Code | Description |
-| ---- | ----------- |
-| 400 | Invalid ID supplied |
-| 404 | Message not found |
+| Code | Description         |
+| ---- | ------------------- |
+| 400  | Invalid ID supplied |
+| 404  | Message not found   |
 
 null
 
-### /user
+### /users
+
+#### GET
+
+##### Summary:
+
+Get users
+
+##### Description:
+
+Returns all users
+
+##### Responses
+
+| Code | Description          | Schema            |
+| ---- | -------------------- | ----------------- |
+| 200  | successful operation | [ [User](#user) ] |
+| 400  | Invalid ID supplied  |                   |
+| 404  | Message not found    |                   |
+
+null
 
 #### POST
+
 ##### Summary:
 
 Create user
@@ -256,89 +277,88 @@ This can only be done by the logged in user.
 
 ##### Parameters
 
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| body | body | Created user object | Yes | [User](#user) |
+| Name | Located in | Description         | Required | Schema        |
+| ---- | ---------- | ------------------- | -------- | ------------- |
+| body | body       | Created user object | Yes      | [User](#user) |
 
 ##### Responses
 
-| Code | Description |
-| ---- | ----------- |
+| Code    | Description          |
+| ------- | -------------------- |
 | default | successful operation |
 
-### /user/login
+### /users/login
 
 #### GET
+
 ##### Summary:
 
 Logs user into the system
 
 ##### Description:
 
-
-
 ##### Parameters
 
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| username | query | The user name for login | Yes | string |
-| password | query | The password for login in clear text | Yes | string |
+| Name     | Located in | Description                          | Required | Schema |
+| -------- | ---------- | ------------------------------------ | -------- | ------ |
+| username | query      | The user name for login              | Yes      | string |
+| password | query      | The password for login in clear text | Yes      | string |
 
 ##### Responses
 
-| Code | Description |
-| ---- | ----------- |
-| 200 | successful operation |
-| 400 | Invalid username/password supplied |
+| Code | Description                        |
+| ---- | ---------------------------------- |
+| 200  | successful operation               |
+| 400  | Invalid username/password supplied |
 
-### /user/logout
+### /users/logout
 
 #### GET
+
 ##### Summary:
 
 Logs out current logged in user session
 
 ##### Description:
 
-
-
 ##### Parameters
 
 | Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
+| ---- | ---------- | ----------- | -------- | ------ |
+
 
 ##### Responses
 
-| Code | Description |
-| ---- | ----------- |
+| Code    | Description          |
+| ------- | -------------------- |
 | default | successful operation |
 
-### /user/{username}
+### /users/{username}
 
 #### GET
+
 ##### Summary:
 
 Get user by user name
 
 ##### Description:
 
-
-
 ##### Parameters
 
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| username | path | The name that needs to be fetched. Use user1 for testing.  | Yes | string |
+| Name     | Located in | Description                                               | Required | Schema |
+| -------- | ---------- | --------------------------------------------------------- | -------- | ------ |
+| username | path       | The name that needs to be fetched. Use user1 for testing. | Yes      | string |
 
 ##### Responses
 
-| Code | Description | Schema |
-| ---- | ----------- | ------ |
-| 200 | successful operation | [User](#user) |
-| 400 | Invalid username supplied |  |
-| 404 | User not found |  |
+| Code | Description               | Schema        |
+| ---- | ------------------------- | ------------- |
+| 200  | successful operation      | [User](#user) |
+| 400  | Invalid username supplied |               |
+| 404  | User not found            |               |
 
 #### PUT
+
 ##### Summary:
 
 Updated user
@@ -349,19 +369,20 @@ This can only be done by the logged in user.
 
 ##### Parameters
 
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| username | path | name that need to be updated | Yes | string |
-| body | body | Updated user object | Yes | [User](#user) |
+| Name     | Located in | Description                  | Required | Schema        |
+| -------- | ---------- | ---------------------------- | -------- | ------------- |
+| username | path       | name that need to be updated | Yes      | string        |
+| body     | body       | Updated user object          | Yes      | [User](#user) |
 
 ##### Responses
 
-| Code | Description |
-| ---- | ----------- |
-| 400 | Invalid user supplied |
-| 404 | User not found |
+| Code | Description           |
+| ---- | --------------------- |
+| 400  | Invalid user supplied |
+| 404  | User not found        |
 
 #### DELETE
+
 ##### Summary:
 
 Delete user
@@ -372,68 +393,62 @@ This can only be done by the logged in user.
 
 ##### Parameters
 
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| username | path | The name that needs to be deleted | Yes | string |
+| Name     | Located in | Description                       | Required | Schema |
+| -------- | ---------- | --------------------------------- | -------- | ------ |
+| username | path       | The name that needs to be deleted | Yes      | string |
 
 ##### Responses
 
-| Code | Description |
-| ---- | ----------- |
-| 400 | Invalid username supplied |
-| 404 | User not found |
+| Code | Description               |
+| ---- | ------------------------- |
+| 400  | Invalid username supplied |
+| 404  | User not found            |
 
 ### /swagger
 
 ### Models
 
-
 #### HelloWorldResponse
 
-| Name | Type | Description | Required |
-| ---- | ---- | ----------- | -------- |
-| message | string |  | Yes |
+| Name    | Type   | Description | Required |
+| ------- | ------ | ----------- | -------- |
+| message | string |             | Yes      |
 
 #### ErrorResponse
 
-| Name | Type | Description | Required |
-| ---- | ---- | ----------- | -------- |
-| message | string |  | Yes |
+| Name    | Type   | Description | Required |
+| ------- | ------ | ----------- | -------- |
+| message | string |             | Yes      |
 
 #### Message
 
-| Name | Type | Description | Required |
-| ---- | ---- | ----------- | -------- |
-| messageId | long |  | No |
-| userId | long |  | No |
-| content | string |  | No |
-| sentDate | dateTime |  | No |
+| Name      | Type     | Description | Required |
+| --------- | -------- | ----------- | -------- |
+| messageId | long     |             | No       |
+| userId    | long     |             | No       |
+| content   | string   |             | No       |
+| sentDate  | dateTime |             | No       |
 
 #### Conversation
 
-| Name | Type | Description | Required |
-| ---- | ---- | ----------- | -------- |
-| conversationId | long |  | No |
-| userIds | [ long ] |  | No |
-
-#### Conversations
-
-| Name | Type | Description | Required |
-| ---- | ---- | ----------- | -------- |
-| conversations | [ [Conversation](#conversation) ] |  | No |
+| Name           | Type                    | Description | Required |
+| -------------- | ----------------------- | ----------- | -------- |
+| conversationId | long                    |             | No       |
+| users          | [ long ]                |             | No       |
+| messages       | [ [Message](#message) ] |             | No       |
 
 #### User
 
-| Name | Type | Description | Required |
-| ---- | ---- | ----------- | -------- |
-| userId | long |  | No |
-| username | string |  | Yes |
-| firstName | string |  | No |
-| lastName | string |  | No |
-| email | string |  | No |
-| password | string |  | No |
-| phone | string |  | No |
-| isDoctor | boolean |  | No |
-| age | integer |  | No |
-| blood | string |  | No |
-| userStatus | string | User Status | No |
+| Name       | Type    | Description | Required |
+| ---------- | ------- | ----------- | -------- |
+| userId     | long    |             | No       |
+| username   | string  |             | Yes      |
+| firstName  | string  |             | No       |
+| lastName   | string  |             | No       |
+| email      | string  |             | No       |
+| password   | string  |             | No       |
+| phone      | string  |             | No       |
+| isDoctor   | boolean |             | No       |
+| age        | integer |             | No       |
+| blood      | string  |             | No       |
+| userStatus | string  | User Status | No       |

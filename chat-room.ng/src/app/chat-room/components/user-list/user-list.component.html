@@ -1,0 +1,35 @@
+<div class="d-flex flex-column flex-grow-1 px-4">
+  <form [formGroup]="usersTypeForm" class="mt-4">
+    <div class="btn-group btn-group-toggle d-flex" ngbRadioGroup name="usersType" formControlName="usersType">
+      <label ngbButtonLabel class="btn-outline-primary w-50">
+        <input ngbButton type="radio" [value]="UserTypes.Patients" />Patients</label
+      >
+      <label ngbButtonLabel class="btn-outline-primary w-50">
+        <input ngbButton type="radio" [value]="UserTypes.Doctors" />Colleagues</label
+      >
+    </div>
+  </form>
+  <div class="mt-4">
+    <div *ngFor="let conversation of conversations | async" class="bg-white mt-2 shadow-sm conversation">
+      <div *ngIf="conversation.messages[conversation.messages.length - 1] as message" class="px-3 py-3">
+        <div *ngIf="users[message.userId] as user" class="d-flex">
+          <div class="rounded-circle shadow-sm avatar text-center">
+            <h3 class="text-uppercase text-primary py-2">
+              <span>{{ user.firstName[0] }}</span>
+              <span>{{ user.lastName[0] }}</span>
+            </h3>
+          </div>
+          <div class="flex-grow-1 ml-3">
+            <h5>
+              <span class="text-capitalize">{{ user.firstName }} </span>
+              <span class="text-capitalize">{{ user.lastName }}</span>
+            </h5>
+            <p>
+              {{ message.content }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
