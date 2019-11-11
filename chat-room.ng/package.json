@@ -4,6 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:swagger": "ng serve --configuration=swagger",
+    "start:mvc": "ng build --configuration=mvc",
     "build": "ng build",
     "build:prod": "ng build --prod",
     "build:mvc:prod": "ng build --configuration=mvc-production",

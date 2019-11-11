@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   hubConnection: HubConnection;
 
   ngOnInit() {
+    /*
     this.name = window.prompt('Name:', 'Javier');
 
     this.hubConnection = new HubConnectionBuilder().withUrl(`${environment.api_path}chat-room`).build();
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit {
       const text = `${name}: ${message}`;
       this.messages.push(text);
     });
+    */
   }
 
   sendMessage() {

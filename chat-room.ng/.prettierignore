@@ -1,0 +1,10 @@
+# Ignore everything:
+/*
+
+# Except src:
+!/src
+
+# Within src:
+src/polyfills.ts
+src/test.ts
+src/app/api/*
