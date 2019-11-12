@@ -11,7 +11,6 @@ import { switchMap } from 'rxjs/operators';
 })
 export class RegisterComponent implements OnInit {
   authForm: FormGroup;
-
   errorMessage: string;
 
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {}

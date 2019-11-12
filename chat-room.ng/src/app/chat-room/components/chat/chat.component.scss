@@ -1,5 +1,31 @@
+@import '../../../../styles/bootstrap/variables';
+
 :host {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+}
+
+.chat {
+  background-color: #f4f6fa;
+}
+
+.close {
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+}
+
+.send {
+  right: 0;
+}
+
+.content-container {
+  background-color: $gray-100;
+  border-radius: 20px;
+
+  input {
+    border-radius: 20px;
+  }
 }

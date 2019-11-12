@@ -1,7 +1,39 @@
-<div *ngIf="conversation$ | async as conversation">
-  <div>
-    <div *ngFor="let user of conversation.users">
-      <app-avatar [user]="users[user]"></app-avatar>
+<div class="d-flex flex-column flex-grow-1 justify-content-end chat shadow-sm position-relative">
+  <a routerLink="../" class="btn close rounded-circle shadow-sm position-absolute mt-2 mr-4 text-center" type="button">
+    <h2 class="m-0 font-weight-light">&times;</h2>
+  </a>
+  <div *ngIf="conversation$ | async as conversation" class="mt-4 px-4 flex-grow-1">
+    <div>
+      <div *ngFor="let userId of conversation.users">
+        <div class="d-flex align-items-center" *ngIf="users[userId] as user">
+          <app-avatar [user]="user"></app-avatar>
+          <h4 class="ml-3 my-0">
+            <span>{{ user.firstName }}</span>
+            <span>{{ user.lastName }}</span>
+          </h4>
+        </div>
+      </div>
     </div>
+  </div>
+  <div class="bg-white shadow">
+    <form [formGroup]="chatForm" class="d-flex flex-column py-2 px-4" (ngSubmit)="send()" (keyup.enter)="send()">
+      <div class="d-flex content-container position-relative">
+        <div class="form-group m-0 w-100">
+          <input
+            id="content"
+            name="content"
+            type="text"
+            class="form-control border-0 bg-transparent w-100"
+            placeholder="Enter text"
+            formControlName="content"
+          />
+        </div>
+        <div class="position-absolute send">
+          <button class="btn btn-primary rounded-circle shadow-sm" type="submit" [disabled]="chatForm.invalid">
+            <fa name="paper-plane"></fa>
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
 </div>

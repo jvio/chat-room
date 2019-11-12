@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  users: { [userId: number]: User };
+  users: { [userId: number]: User } = {};
   conversations$: Observable<Conversation[]>;
 
   usersTypeForm: FormGroup;
