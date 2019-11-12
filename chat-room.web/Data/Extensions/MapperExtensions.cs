@@ -30,6 +30,7 @@ namespace chat_room.web.Data.Extensions
             {
                 UserId = u.UserId,
                 Username = u.Username,
+                Password = u.Password,
                 FirstName = u.FirstName,
                 LastName = u.LastName,
                 Email = u.Email,

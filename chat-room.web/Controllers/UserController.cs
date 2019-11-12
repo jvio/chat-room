@@ -80,6 +80,15 @@ namespace chat_room.web.Controllers
         [Route("/users")]
         public async Task<ActionResult<User>> CreateUser([FromBody]User body)
         {
+            var user = await _db.Users.SingleOrDefaultAsync(u => u.Username == body.Username);
+            
+            if (user != null)
+            {
+                return BadRequest();
+            }
+
+            body.Password = body.Password.Encrypt();
+            
             var entity = await _db.Users.AddAsync(body.ToUser());
             await _db.SaveChangesAsync();
             return entity.Entity.ToUser();

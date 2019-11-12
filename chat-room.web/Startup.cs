@@ -5,6 +5,7 @@ using chat_room.web.OpenApi.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -43,6 +44,12 @@ namespace chat_room.web
             
             // Adding session
             services.AddSession();
+
+            // Adding spa static files
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "../chat-room.ng/dist";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +66,12 @@ namespace chat_room.web
             // Enables serve static files of ng
             app.UseStaticFiles();
 
+            // Use spa static files in prod
+            if (!env.IsDevelopment())
+            {
+                app.UseSpaStaticFiles();
+            }
+
             // Enables session
             app.UseSession();
             
@@ -71,8 +84,8 @@ namespace chat_room.web
             // Defines endpoints
             app.UseEndpoints(endpoints =>
             {
-                // Hello world 
-                endpoints.MapGet("/", async context =>
+                // Hello world
+                endpoints.MapGet("/hello", async context =>
                 {
                     await context.Response.WriteAsync("Hello World!");
                 });
@@ -82,6 +95,17 @@ namespace chat_room.web
                 
                 // Adding Api
                 endpoints.MapControllers();
+            });
+            
+            // Connects angular cli build with net core pipeline
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "../chat-room.ng";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer("start:mvc");
+                }
             });
             
             // Creates db
