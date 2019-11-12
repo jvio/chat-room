@@ -2,8 +2,8 @@
   <a routerLink="../" class="btn close rounded-circle shadow-sm position-absolute mt-2 mr-4 text-center" type="button">
     <h2 class="m-0 font-weight-light">&times;</h2>
   </a>
-  <div *ngIf="conversation$ | async as conversation" class="mt-4 px-4 flex-grow-1">
-    <div>
+  <div *ngIf="conversation$ | async as conversation" class="d-flex flex-column flex-grow-1 mt-4">
+    <div class="px-4 pb-3 border-bottom">
       <div *ngFor="let userId of conversation.users">
         <div class="d-flex align-items-center" *ngIf="users[userId] as user">
           <app-avatar [user]="user"></app-avatar>
@@ -11,6 +11,24 @@
             <span>{{ user.firstName }}</span>
             <span>{{ user.lastName }}</span>
           </h4>
+        </div>
+      </div>
+    </div>
+    <div #messages class="flex-grow-1 position-relative messages-container" [scrollTop]="messages.scrollHeight">
+      <div class="position-absolute messages">
+        <div class="d-flex flex-column justify-content-end pb-4">
+          <div
+            *ngFor="let message of conversation.messages"
+            class="px-5 pt-4 message"
+            [class.align-self-end]="message.userId == 1"
+          >
+            <div class="ballon py-4 px-5 shadow" [class.mine]="message.userId == 1">
+              {{ message.content }}
+            </div>
+            <div class="small mt-1 px-3 text-black-50" [class.text-right]="message.userId == 1">
+              {{ message.sentDate | date }}
+            </div>
+          </div>
         </div>
       </div>
     </div>
