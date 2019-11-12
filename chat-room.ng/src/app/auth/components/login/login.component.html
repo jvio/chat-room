@@ -1,0 +1,35 @@
+<form [formGroup]="authForm" class="d-flex flex-column pt-5 w-50" (ngSubmit)="login()" (keyup.enter)="login()">
+  <div class="bg-white shadow p-5 login">
+    <div class="d-flex align-items-center">
+      <fa name="user-md" class="text-secondary" size="3x"></fa>
+      <h1 class="h3 ml-3 mt-0 mb-0 font-weight-normal">Please Sign In</h1>
+    </div>
+    <div
+      class="form-group mt-3"
+      [class.is-invalid]="authForm.controls['username'].dirty && authForm.controls['username'].invalid"
+    >
+      <label for="username" class="small">Username</label>
+      <input id="username" name="username" type="username" class="form-control" formControlName="username" />
+    </div>
+    <div
+      class="form-group"
+      [class.is-invalid]="authForm.controls['password'].dirty && authForm.controls['password'].invalid"
+    >
+      <label for="password" class="small">Password</label>
+      <input id="password" name="password" type="password" class="form-control" formControlName="password" />
+    </div>
+    <div [hidden]="!errorMessage" class="alert alert-danger mt-4 small text-center">
+      {{ errorMessage }}
+    </div>
+    <div class="d-flex mt-5">
+      <div class="w-50">
+        <a routerLink="/register" class="btn btn-lg btn-outline-dark w-100">
+          Register
+        </a>
+      </div>
+      <div class="pl-4 w-50">
+        <button class="btn btn-lg btn-primary w-100" type="submit" [disabled]="authForm.invalid">Sign in</button>
+      </div>
+    </div>
+  </div>
+</form>

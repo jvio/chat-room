@@ -8,7 +8,9 @@ import { ApiModule, BASE_PATH, Configuration } from './api';
 import { CoreModule } from './core/core.module';
 import { ChatRoomModule } from './chat-room/chat-room.module';
 import { environment } from '../environments/environment';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AppErrorHttpInterceptor } from './app.error-http-interceptor';
+import { AuthModule } from './auth/auth.module';
 
 /**
  * Configuration for API, example:
@@ -35,6 +37,7 @@ export function getApiConfig(): Configuration {
     HttpClientModule,
     ApiModule.forRoot(getApiConfig),
     CoreModule,
+    AuthModule,
     ChatRoomModule,
     AppRoutingModule
   ],
@@ -42,7 +45,11 @@ export function getApiConfig(): Configuration {
     /**
      * For Api, if different than the generated base path, during app bootstrap, provide the base path to your service.
      */
-    { provide: BASE_PATH, useValue: environment.api_path }
+    { provide: BASE_PATH, useValue: environment.api_path },
+    /**
+     * Http interceptor to handle different scenarios like loading indicators
+     */
+    { provide: HTTP_INTERCEPTORS, useClass: AppErrorHttpInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
