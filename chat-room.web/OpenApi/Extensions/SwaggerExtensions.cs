@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 
-namespace chat_room.web.Swagger.Extensions
+namespace chat_room.web.OpenApi.Extensions
 {
     public static class SwaggerExtensions
     {
@@ -11,7 +11,7 @@ namespace chat_room.web.Swagger.Extensions
             // the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger.json", "chat-room");
+                c.SwaggerEndpoint("/openapi.json", "chat-room");
             });
         }
     }

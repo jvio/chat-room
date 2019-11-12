@@ -14,6 +14,7 @@
 export interface Message { 
     messageId?: number;
     userId?: number;
+    conversationId?: number;
     content?: string;
     sentDate?: Date;
 }

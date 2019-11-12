@@ -1,7 +1,7 @@
 using chat_room.web.Data;
 using chat_room.web.Data.Extensions;
 using chat_room.web.Hubs;
-using chat_room.web.Swagger.Extensions;
+using chat_room.web.OpenApi.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

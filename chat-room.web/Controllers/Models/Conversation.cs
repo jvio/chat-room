@@ -103,6 +103,12 @@ namespace chat_room.web.Controllers.Models
         /// </summary>
         [DataMember(Name="userId", EmitDefaultValue=false)]
         public long UserId { get; set; }
+        
+        /// <summary>
+        /// Gets or Sets ConversationId
+        /// </summary>
+        [DataMember(Name="conversationId", EmitDefaultValue=false)]
+        public long ConversationId { get; set; }
 
         /// <summary>
         /// Gets or Sets Content

@@ -43,9 +43,10 @@ Add a new message to the conversation
 
 ##### Responses
 
-| Code | Description   |
-| ---- | ------------- |
-| 405  | Invalid input |
+| Code | Description          | Schema              |
+| ---- | -------------------- | ------------------- |
+| 200  | successful operation | [Message](#message) |
+| 405  | Invalid input        |                     |
 
 null
 
@@ -65,11 +66,12 @@ Update an existing message
 
 ##### Responses
 
-| Code | Description          |
-| ---- | -------------------- |
-| 400  | Invalid ID supplied  |
-| 404  | Message not found    |
-| 405  | Validation exception |
+| Code | Description          | Schema              |
+| ---- | -------------------- | ------------------- |
+| 200  | successful operation | [Message](#message) |
+| 400  | Invalid ID supplied  |                     |
+| 404  | Message not found    |                     |
+| 405  | Validation exception |                     |
 
 null
 
@@ -162,9 +164,10 @@ Add a new conversation
 
 ##### Responses
 
-| Code | Description   |
-| ---- | ------------- |
-| 405  | Invalid input |
+| Code | Description          | Schema                        |
+| ---- | -------------------- | ----------------------------- |
+| 200  | successful operation | [Conversation](#conversation) |
+| 405  | Invalid input        |                               |
 
 null
 
@@ -184,11 +187,12 @@ Update an existing conversation
 
 ##### Responses
 
-| Code | Description            |
-| ---- | ---------------------- |
-| 400  | Invalid ID supplied    |
-| 404  | Conversation not found |
-| 405  | Validation exception   |
+| Code | Description            | Schema                        |
+| ---- | ---------------------- | ----------------------------- |
+| 200  | successful operation   | [Conversation](#conversation) |
+| 400  | Invalid ID supplied    |                               |
+| 404  | Conversation not found |                               |
+| 405  | Validation exception   |                               |
 
 null
 
@@ -283,9 +287,9 @@ This can only be done by the logged in user.
 
 ##### Responses
 
-| Code    | Description          |
-| ------- | -------------------- |
-| default | successful operation |
+| Code | Description          | Schema        |
+| ---- | -------------------- | ------------- |
+| 200  | successful operation | [User](#user) |
 
 ### /users/login
 
@@ -418,16 +422,17 @@ This can only be done by the logged in user.
 
 | Name    | Type   | Description | Required |
 | ------- | ------ | ----------- | -------- |
-| message | string |             | Yes      |
+| message | string |             | No       |
 
 #### Message
 
-| Name      | Type     | Description | Required |
-| --------- | -------- | ----------- | -------- |
-| messageId | long     |             | No       |
-| userId    | long     |             | No       |
-| content   | string   |             | No       |
-| sentDate  | dateTime |             | No       |
+| Name           | Type     | Description | Required |
+| -------------- | -------- | ----------- | -------- |
+| messageId      | long     |             | No       |
+| userId         | long     |             | No       |
+| conversationId | long     |             | No       |
+| content        | string   |             | No       |
+| sentDate       | dateTime |             | No       |
 
 #### Conversation
 

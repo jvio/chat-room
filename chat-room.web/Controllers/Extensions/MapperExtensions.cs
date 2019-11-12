@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using chat_room.web.Data.Models;
 
@@ -38,7 +39,8 @@ namespace chat_room.web.Controllers.Extensions
                 MessageId = m.MessageId,
                 UserId = m.UserId,
                 Content =  m.Content,
-                SentDate = m.SentDate
+                SentDate = new DateTime(),
+                ConversationId = m.ConversationId
             };
         }
     }

@@ -28,7 +28,7 @@ import { Configuration }                                     from '../configurat
 })
 export class MessageService {
 
-    protected basePath = 'http://localhost:10010';
+    protected basePath = 'http://localhost';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -54,9 +54,9 @@ export class MessageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addMessage(body: Message, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public addMessage(body: Message, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public addMessage(body: Message, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public addMessage(body: Message, observe?: 'body', reportProgress?: boolean): Observable<Message>;
+    public addMessage(body: Message, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Message>>;
+    public addMessage(body: Message, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Message>>;
     public addMessage(body: Message, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling addMessage.');
@@ -66,6 +66,7 @@ export class MessageService {
 
         // to determine the Accept header
         const httpHeaderAccepts: string[] = [
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected !== undefined) {
@@ -82,7 +83,7 @@ export class MessageService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<any>(`${this.configuration.basePath}/messages`,
+        return this.httpClient.post<Message>(`${this.configuration.basePath}/messages`,
             body,
             {
                 withCredentials: this.configuration.withCredentials,
@@ -171,9 +172,9 @@ export class MessageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updateMessage(body: Message, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public updateMessage(body: Message, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public updateMessage(body: Message, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public updateMessage(body: Message, observe?: 'body', reportProgress?: boolean): Observable<Message>;
+    public updateMessage(body: Message, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Message>>;
+    public updateMessage(body: Message, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Message>>;
     public updateMessage(body: Message, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling updateMessage.');
@@ -183,6 +184,7 @@ export class MessageService {
 
         // to determine the Accept header
         const httpHeaderAccepts: string[] = [
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected !== undefined) {
@@ -199,7 +201,7 @@ export class MessageService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.put<any>(`${this.configuration.basePath}/messages`,
+        return this.httpClient.put<Message>(`${this.configuration.basePath}/messages`,
             body,
             {
                 withCredentials: this.configuration.withCredentials,

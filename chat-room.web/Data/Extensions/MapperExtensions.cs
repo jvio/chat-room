@@ -47,7 +47,8 @@ namespace chat_room.web.Data.Extensions
                 MessageId = m.MessageId,
                 UserId = m.UserId,
                 Content =  m.Content,
-                SentDate = m.SentDate
+                SentDate = m.SentDate,
+                ConversationId = m.ConversationId
             };
         }
     }

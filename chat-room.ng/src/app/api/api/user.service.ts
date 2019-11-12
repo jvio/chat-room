@@ -28,7 +28,7 @@ import { Configuration }                                     from '../configurat
 })
 export class UserService {
 
-    protected basePath = 'http://localhost:10010';
+    protected basePath = 'http://localhost';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -55,9 +55,9 @@ export class UserService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createUser(body: User, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public createUser(body: User, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public createUser(body: User, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public createUser(body: User, observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public createUser(body: User, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public createUser(body: User, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
     public createUser(body: User, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling createUser.');
@@ -67,6 +67,7 @@ export class UserService {
 
         // to determine the Accept header
         const httpHeaderAccepts: string[] = [
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected !== undefined) {
@@ -83,7 +84,7 @@ export class UserService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<any>(`${this.configuration.basePath}/users`,
+        return this.httpClient.post<User>(`${this.configuration.basePath}/users`,
             body,
             {
                 withCredentials: this.configuration.withCredentials,

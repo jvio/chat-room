@@ -1,0 +1,736 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Swagger Chat-Room",
+    "version" : "1.0.0"
+  },
+  "externalDocs" : {
+    "description" : "Find out more about Swagger",
+    "url" : "http://swagger.io"
+  },
+  "servers" : [ {
+    "url" : "/"
+  } ],
+  "tags" : [ {
+    "description" : "Messages",
+    "name" : "message"
+  }, {
+    "description" : "Conversations",
+    "name" : "conversation"
+  }, {
+    "description" : "Operations about user",
+    "name" : "user"
+  } ],
+  "paths" : {
+    "/hello" : {
+      "get" : {
+        "description" : "Returns 'Hello' to the caller",
+        "operationId" : "hello",
+        "parameters" : [ {
+          "description" : "The name of the person to whom to say hello",
+          "in" : "query",
+          "name" : "name",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/HelloWorldResponse"
+                }
+              }
+            },
+            "description" : "Success"
+          },
+          "default" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description" : "Error"
+          }
+        }
+      },
+      "x-swagger-router-controller" : "hello_world"
+    },
+    "/messages" : {
+      "post" : {
+        "operationId" : "addMessage",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Message"
+              }
+            }
+          },
+          "description" : "Message object that needs to be added to the conversation",
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Message"
+                }
+              }
+            },
+            "description" : "successful operation"
+          },
+          "405" : {
+            "content" : { },
+            "description" : "Invalid input"
+          }
+        },
+        "summary" : "Add a new message to the conversation",
+        "tags" : [ "message" ],
+        "x-codegen-request-body-name" : "body"
+      },
+      "put" : {
+        "operationId" : "updateMessage",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Message"
+              }
+            }
+          },
+          "description" : "Message object that needs to be updated to the conversation",
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Message"
+                }
+              }
+            },
+            "description" : "successful operation"
+          },
+          "400" : {
+            "content" : { },
+            "description" : "Invalid ID supplied"
+          },
+          "404" : {
+            "content" : { },
+            "description" : "Message not found"
+          },
+          "405" : {
+            "content" : { },
+            "description" : "Validation exception"
+          }
+        },
+        "summary" : "Update an existing message",
+        "tags" : [ "message" ],
+        "x-codegen-request-body-name" : "body"
+      }
+    },
+    "/messages/{messageId}" : {
+      "delete" : {
+        "operationId" : "deleteMessage",
+        "parameters" : [ {
+          "description" : "Message id to delete",
+          "in" : "path",
+          "name" : "messageId",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "400" : {
+            "content" : { },
+            "description" : "Invalid ID supplied"
+          },
+          "404" : {
+            "content" : { },
+            "description" : "Message not found"
+          }
+        },
+        "summary" : "Deletes a message",
+        "tags" : [ "message" ]
+      },
+      "get" : {
+        "description" : "Returns a single message",
+        "operationId" : "getMessageById",
+        "parameters" : [ {
+          "description" : "Id of message to return",
+          "in" : "path",
+          "name" : "messageId",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Message"
+                }
+              }
+            },
+            "description" : "successful operation"
+          },
+          "400" : {
+            "content" : { },
+            "description" : "Invalid ID supplied"
+          },
+          "404" : {
+            "content" : { },
+            "description" : "Message not found"
+          }
+        },
+        "summary" : "Find message by ID",
+        "tags" : [ "message" ]
+      }
+    },
+    "/conversations" : {
+      "get" : {
+        "description" : "Returns all conversations",
+        "operationId" : "getConversations",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/Conversation"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "successful operation"
+          },
+          "400" : {
+            "content" : { },
+            "description" : "Invalid ID supplied"
+          },
+          "404" : {
+            "content" : { },
+            "description" : "Message not found"
+          }
+        },
+        "summary" : "Get conversations",
+        "tags" : [ "conversation" ]
+      },
+      "post" : {
+        "operationId" : "addConversation",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Conversation"
+              }
+            }
+          },
+          "description" : "Conversation object that needs to be added",
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Conversation"
+                }
+              }
+            },
+            "description" : "successful operation"
+          },
+          "405" : {
+            "content" : { },
+            "description" : "Invalid input"
+          }
+        },
+        "summary" : "Add a new conversation",
+        "tags" : [ "conversation" ],
+        "x-codegen-request-body-name" : "body"
+      },
+      "put" : {
+        "operationId" : "updateConversation",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Conversation"
+              }
+            }
+          },
+          "description" : "Conversation object that needs to be updated",
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Conversation"
+                }
+              }
+            },
+            "description" : "successful operation"
+          },
+          "400" : {
+            "content" : { },
+            "description" : "Invalid ID supplied"
+          },
+          "404" : {
+            "content" : { },
+            "description" : "Conversation not found"
+          },
+          "405" : {
+            "content" : { },
+            "description" : "Validation exception"
+          }
+        },
+        "summary" : "Update an existing conversation",
+        "tags" : [ "conversation" ],
+        "x-codegen-request-body-name" : "body"
+      },
+      "x-swagger-router-controller" : "conversations"
+    },
+    "/conversations/{conversationId}" : {
+      "delete" : {
+        "operationId" : "deleteConversation",
+        "parameters" : [ {
+          "description" : "Conversation id to delete",
+          "in" : "path",
+          "name" : "conversationId",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "400" : {
+            "content" : { },
+            "description" : "Invalid ID supplied"
+          },
+          "404" : {
+            "content" : { },
+            "description" : "Message not found"
+          }
+        },
+        "summary" : "Deletes a conversation",
+        "tags" : [ "conversation" ]
+      },
+      "get" : {
+        "description" : "Returns a single conversation",
+        "operationId" : "getConversationById",
+        "parameters" : [ {
+          "description" : "Id of conversation to return",
+          "in" : "path",
+          "name" : "conversationId",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Conversation"
+                }
+              }
+            },
+            "description" : "successful operation"
+          },
+          "400" : {
+            "content" : { },
+            "description" : "Invalid ID supplied"
+          },
+          "404" : {
+            "content" : { },
+            "description" : "Message not found"
+          }
+        },
+        "summary" : "Find conversation by ID",
+        "tags" : [ "conversation" ]
+      },
+      "x-swagger-router-controller" : "conversations"
+    },
+    "/users" : {
+      "get" : {
+        "description" : "Returns all users",
+        "operationId" : "getUsers",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/User"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "successful operation"
+          },
+          "400" : {
+            "content" : { },
+            "description" : "Invalid ID supplied"
+          },
+          "404" : {
+            "content" : { },
+            "description" : "Message not found"
+          }
+        },
+        "summary" : "Get users",
+        "tags" : [ "user" ]
+      },
+      "post" : {
+        "description" : "This can only be done by the logged in user.",
+        "operationId" : "createUser",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/User"
+              }
+            }
+          },
+          "description" : "Created user object",
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/User"
+                }
+              }
+            },
+            "description" : "successful operation"
+          }
+        },
+        "summary" : "Create user",
+        "tags" : [ "user" ],
+        "x-codegen-request-body-name" : "body"
+      },
+      "x-swagger-router-controller" : "users"
+    },
+    "/users/login" : {
+      "get" : {
+        "operationId" : "loginUser",
+        "parameters" : [ {
+          "description" : "The user name for login",
+          "in" : "query",
+          "name" : "username",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "description" : "The password for login in clear text",
+          "in" : "query",
+          "name" : "password",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : { },
+            "description" : "successful operation"
+          },
+          "400" : {
+            "content" : { },
+            "description" : "Invalid username/password supplied"
+          }
+        },
+        "summary" : "Logs user into the system",
+        "tags" : [ "user" ]
+      }
+    },
+    "/users/logout" : {
+      "get" : {
+        "operationId" : "logoutUser",
+        "responses" : {
+          "default" : {
+            "content" : { },
+            "description" : "successful operation"
+          }
+        },
+        "summary" : "Logs out current logged in user session",
+        "tags" : [ "user" ]
+      }
+    },
+    "/users/{username}" : {
+      "delete" : {
+        "description" : "This can only be done by the logged in user.",
+        "operationId" : "deleteUser",
+        "parameters" : [ {
+          "description" : "The name that needs to be deleted",
+          "in" : "path",
+          "name" : "username",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "400" : {
+            "content" : { },
+            "description" : "Invalid username supplied"
+          },
+          "404" : {
+            "content" : { },
+            "description" : "User not found"
+          }
+        },
+        "summary" : "Delete user",
+        "tags" : [ "user" ]
+      },
+      "get" : {
+        "operationId" : "getUserByName",
+        "parameters" : [ {
+          "description" : "The name that needs to be fetched. Use user1 for testing. ",
+          "in" : "path",
+          "name" : "username",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/User"
+                }
+              }
+            },
+            "description" : "successful operation"
+          },
+          "400" : {
+            "content" : { },
+            "description" : "Invalid username supplied"
+          },
+          "404" : {
+            "content" : { },
+            "description" : "User not found"
+          }
+        },
+        "summary" : "Get user by user name",
+        "tags" : [ "user" ]
+      },
+      "put" : {
+        "description" : "This can only be done by the logged in user.",
+        "operationId" : "updateUser",
+        "parameters" : [ {
+          "description" : "name that need to be updated",
+          "in" : "path",
+          "name" : "username",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/User"
+              }
+            }
+          },
+          "description" : "Updated user object",
+          "required" : true
+        },
+        "responses" : {
+          "400" : {
+            "content" : { },
+            "description" : "Invalid user supplied"
+          },
+          "404" : {
+            "content" : { },
+            "description" : "User not found"
+          }
+        },
+        "summary" : "Updated user",
+        "tags" : [ "user" ],
+        "x-codegen-request-body-name" : "body"
+      }
+    },
+    "/swagger" : {
+      "x-swagger-pipe" : "swagger_raw"
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "HelloWorldResponse" : {
+        "example" : {
+          "message" : "message"
+        },
+        "properties" : {
+          "message" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "message" ],
+        "type" : "object"
+      },
+      "ErrorResponse" : {
+        "properties" : {
+          "message" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "Message" : {
+        "example" : {
+          "sentDate" : "2000-01-23T04:56:07.000+00:00",
+          "conversationId" : 1,
+          "messageId" : 0,
+          "userId" : 6,
+          "content" : "content"
+        },
+        "properties" : {
+          "messageId" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "userId" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "conversationId" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "content" : {
+            "type" : "string"
+          },
+          "sentDate" : {
+            "format" : "date-time",
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "Conversation" : {
+        "example" : {
+          "conversationId" : 0,
+          "messages" : [ {
+            "sentDate" : "2000-01-23T04:56:07.000+00:00",
+            "conversationId" : 1,
+            "messageId" : 0,
+            "userId" : 6,
+            "content" : "content"
+          }, {
+            "sentDate" : "2000-01-23T04:56:07.000+00:00",
+            "conversationId" : 1,
+            "messageId" : 0,
+            "userId" : 6,
+            "content" : "content"
+          } ],
+          "users" : [ 6, 6 ]
+        },
+        "properties" : {
+          "conversationId" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "users" : {
+            "items" : {
+              "format" : "int64",
+              "type" : "integer"
+            },
+            "type" : "array"
+          },
+          "messages" : {
+            "items" : {
+              "$ref" : "#/components/schemas/Message"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "User" : {
+        "example" : {
+          "firstName" : "firstName",
+          "lastName" : "lastName",
+          "password" : "password",
+          "userStatus" : "online",
+          "phone" : "phone",
+          "isDoctor" : false,
+          "userId" : 0,
+          "blood" : "blood",
+          "email" : "email",
+          "age" : 6,
+          "username" : "username"
+        },
+        "properties" : {
+          "userId" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "username" : {
+            "type" : "string"
+          },
+          "firstName" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          },
+          "phone" : {
+            "type" : "string"
+          },
+          "isDoctor" : {
+            "default" : false,
+            "type" : "boolean"
+          },
+          "age" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "blood" : {
+            "type" : "string"
+          },
+          "userStatus" : {
+            "description" : "User Status",
+            "enum" : [ "online", "offline" ],
+            "type" : "string"
+          }
+        },
+        "required" : [ "username" ],
+        "type" : "object",
+        "xml" : {
+          "name" : "User"
+        }
+      }
+    }
+  }
+}

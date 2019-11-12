@@ -17,10 +17,6 @@ function getConversationById(req, res) {
   // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
   var id = req.swagger.params.conversationId.value;
   var conversation = conversations.conversations.find(c => c.conversationId === id);
-
-  console.log(conversation);
-  console.log(id);
-  console.log(req.swagger.params);
   // this sends back a JSON response which is a single string
   res.json(conversation);
 }
