@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using chat_room.web.Controllers.Extensions;
 using chat_room.web.Controllers.Models;
@@ -28,6 +29,7 @@ namespace chat_room.web.Controllers
             }
 
             body.UserId = userId.Value;
+            body.SentDate = DateTime.Now;
             var entity = await _db.Messages.AddAsync(body.ToMessage());
             await _db.SaveChangesAsync();
             return entity.Entity.ToMessage();

@@ -20,13 +20,24 @@ namespace chat_room.web.Data
             {
                 var user = new User
                 {
-                    Username = "jvio",
-                    Password = "javier".Encrypt(),
-                    FirstName = "Javier",
-                    LastName = "Villarreal",
+                    Username = "jsmith",
+                    Password = "john".Encrypt(),
+                    FirstName = "John",
+                    LastName = "Smith",
                     IsDoctor = true
                 };
                 db.Users.Add(user);
+                db.SaveChanges();
+                
+                var user2 = new User
+                {
+                    Username = "bwayne",
+                    Password = "bruce".Encrypt(),
+                    FirstName = "Bruce",
+                    LastName = "Wayne",
+                    IsDoctor = true
+                };
+                db.Users.Add(user2);
                 db.SaveChanges();
 
                 // Create
@@ -37,6 +48,13 @@ namespace chat_room.web.Data
                     {
                         Conversation = conversation,
                         User = user
+                    }
+                );
+                conversation.UserConversations.Add(
+                    new UserConversation
+                    {
+                        Conversation = conversation,
+                        User = user2
                     }
                 );
                 db.Add(conversation);

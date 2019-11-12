@@ -3,12 +3,12 @@
     <h2 class="m-0 font-weight-light">&times;</h2>
   </a>
   <div *ngIf="conversation$ | async as conversation" class="d-flex flex-column flex-grow-1 mt-4">
-    <div class="px-4 pb-3 border-bottom">
-      <div *ngFor="let userId of conversation.users">
+    <div class="d-flex px-4 pb-3 border-bottom">
+      <div class="d-flex" *ngFor="let userId of conversation.users">
         <div class="d-flex align-items-center" *ngIf="users[userId] as user">
           <app-avatar [user]="user"></app-avatar>
-          <h4 class="ml-3 my-0">
-            <span>{{ user.firstName }}</span>
+          <h4 class="mx-2 my-0">
+            <span>{{ user.firstName }} </span>
             <span>{{ user.lastName }}</span>
           </h4>
         </div>

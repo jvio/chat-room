@@ -39,7 +39,7 @@ namespace chat_room.web.Controllers.Extensions
                 MessageId = m.MessageId,
                 UserId = m.UserId,
                 Content =  m.Content,
-                SentDate = new DateTime(),
+                SentDate = m.SentDate,
                 ConversationId = m.ConversationId
             };
         }

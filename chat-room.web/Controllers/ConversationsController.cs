@@ -51,7 +51,12 @@ namespace chat_room.web.Controllers
                 return Unauthorized();
             }
             
-            var conversation = await _db.Conversations.FindAsync(conversationId);
+            var conversation = await _db.Conversations
+                .Include(c => c.Messages)
+                .Include(c => c.UserConversations)
+                .Where(c => c.ConversationId == conversationId)
+                .FirstOrDefaultAsync();
+            
             if (conversation == null)
             {
                 return NotFound();
