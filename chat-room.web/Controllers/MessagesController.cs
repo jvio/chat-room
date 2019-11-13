@@ -4,7 +4,9 @@ using chat_room.web.Controllers.Extensions;
 using chat_room.web.Controllers.Models;
 using chat_room.web.Data;
 using chat_room.web.Data.Extensions;
+using chat_room.web.Hubs;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace chat_room.web.Controllers
 {
@@ -12,10 +14,12 @@ namespace chat_room.web.Controllers
     public class MessagesController : ControllerBase
     {
         private readonly ChatRoomContext _db;
+        private readonly IHubContext<ChatRoomHub> _hub;
 
-        public MessagesController(ChatRoomContext context)
+        public MessagesController(ChatRoomContext context, IHubContext<ChatRoomHub> hub)
         {
             _db = context;
+            _hub = hub;
         }
         
         [HttpPost]
@@ -32,6 +36,10 @@ namespace chat_room.web.Controllers
             body.SentDate = DateTime.Now;
             var entity = await _db.Messages.AddAsync(body.ToMessage());
             await _db.SaveChangesAsync();
+            await _hub.Clients.All.SendAsync(
+                Methods.SendAll, 
+                MessageTypes.Message, 
+                entity.Entity.ConversationId);
             return entity.Entity.ToMessage();
         }
     }

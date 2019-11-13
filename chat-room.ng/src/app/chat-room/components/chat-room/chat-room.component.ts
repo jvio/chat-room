@@ -4,7 +4,6 @@ import { ConversationService, User, UserService } from '../../../api';
 import { Observable, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UsersTypes } from '../user-list/user-list.component';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -43,10 +42,6 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.userService.getUsers().subscribe(users => {
-      this.users = users;
-    });
-
     this.createUsersTypeForm();
     this.createChatForm();
   }
@@ -69,6 +64,9 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
 
   open(content) {
     this.modal = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+    this.userService.getUsers().subscribe(users => {
+      this.users = users;
+    });
   }
 
   start() {
@@ -90,4 +88,9 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
         );
     }
   }
+}
+
+export enum UsersTypes {
+  Patients = 1,
+  Doctors = 2
 }

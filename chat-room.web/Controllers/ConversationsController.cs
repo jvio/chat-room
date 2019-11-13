@@ -7,8 +7,10 @@ using chat_room.web.Controllers.Extensions;
 using chat_room.web.Controllers.Models;
 using chat_room.web.Data;
 using chat_room.web.Data.Extensions;
+using chat_room.web.Hubs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace chat_room.web.Controllers
@@ -17,10 +19,12 @@ namespace chat_room.web.Controllers
     public class ConversationsController : ControllerBase
     {
         private readonly ChatRoomContext _db;
+        private readonly IHubContext<ChatRoomHub> _hub;
 
-        public ConversationsController(ChatRoomContext context)
+        public ConversationsController(ChatRoomContext context, IHubContext<ChatRoomHub> hub)
         {
             _db = context;
+            _hub = hub;
         }
         
         [HttpGet]
@@ -75,8 +79,14 @@ namespace chat_room.web.Controllers
                 return Unauthorized();
             }
             
+            if (!body.Users.Contains(userId.Value)) {
+                body.Users.Add(userId.Value);
+            }
             var entity = await _db.Conversations.AddAsync(body.ToConversation());
             await _db.SaveChangesAsync();
+            await _hub.Clients.All.SendAsync(
+                Methods.SendAll, 
+                MessageTypes.Conversation);
             return entity.Entity.ToConversation();
         }
     }

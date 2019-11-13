@@ -292,6 +292,7 @@ paths:
           schema:
             $ref: '#/definitions/User'
   /users/login:
+    x-swagger-router-controller: users
     get:
       tags:
         - 'user'
@@ -315,6 +316,7 @@ paths:
         400:
           description: 'Invalid username/password supplied'
   /users/logout:
+    x-swagger-router-controller: users
     get:
       tags:
         - 'user'
@@ -326,6 +328,7 @@ paths:
         default:
           description: 'successful operation'
   /users/{username}:
+    x-swagger-router-controller: users
     get:
       tags:
         - 'user'

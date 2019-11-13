@@ -2,7 +2,7 @@
   <a routerLink="../" class="btn close rounded-circle shadow-sm position-absolute mt-2 mr-4 text-center">
     <h2 class="m-0 font-weight-light">&times;</h2>
   </a>
-  <div *ngIf="conversation$ | async as conversation" class="d-flex flex-column flex-grow-1 mt-4">
+  <div *ngIf="conversation" class="d-flex flex-column flex-grow-1 mt-4">
     <div class="d-flex px-4 pb-3 border-bottom">
       <div class="d-flex" *ngFor="let userId of conversation.users">
         <div class="d-flex align-items-center" *ngIf="users[userId] as user">

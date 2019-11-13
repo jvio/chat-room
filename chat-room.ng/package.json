@@ -5,10 +5,10 @@
     "ng": "ng",
     "start": "ng serve",
     "start:swagger": "ng serve --configuration=swagger",
-    "start:mvc": "ng serve --configuration=mvc",
+    "start:web": "ng serve --configuration=web",
     "build": "ng build",
     "build:prod": "ng build --prod",
-    "build:mvc:prod": "ng build --configuration=mvc-production",
+    "build:web:prod": "ng build --configuration=web-production",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

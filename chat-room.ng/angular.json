@@ -65,19 +65,19 @@
                 }
               ]
             },
-            "mvc": {
+            "web": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.mvc.ts"
+                  "with": "src/environments/environment.web.ts"
                 }
               ]
             },
-            "mvc-production": {
+            "web-production": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.mvc.prod.ts"
+                  "with": "src/environments/environment.web.prod.ts"
                 }
               ],
               "optimization": true,
@@ -116,11 +116,11 @@
             "swagger": {
               "browserTarget": "chat-room:build:swagger"
             },
-            "mvc": {
-              "browserTarget": "chat-room:build:mvc"
+            "web": {
+              "browserTarget": "chat-room:build:web"
             },
-            "mvc-production": {
-              "browserTarget": "chat-room:build:mvc-production"
+            "web-production": {
+              "browserTarget": "chat-room:build:web-production"
             }
           }
         },
@@ -162,11 +162,11 @@
             "swagger": {
               "devServerTarget": "chat-room:build:swagger"
             },
-            "mvc": {
-              "devServerTarget": "chat-room:build:mvc"
+            "web": {
+              "devServerTarget": "chat-room:build:web"
             },
-            "mvc-production": {
-              "devServerTarget": "chat-room:build:mvc-production"
+            "web-production": {
+              "devServerTarget": "chat-room:build:web-production"
             }
           }
         }

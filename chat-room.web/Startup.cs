@@ -104,7 +104,7 @@ namespace chat_room.web
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer("start:mvc");
+                    spa.UseAngularCliServer("start:web");
                 }
             });
             
