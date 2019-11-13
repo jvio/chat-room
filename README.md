@@ -1,4 +1,4 @@
-# Chart Room Demo
+# Chat Room Demo
 
 ## Introduction
 
