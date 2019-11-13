@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Conversation, ConversationService, User, UserService } from '../../../api';
 import { Observable } from 'rxjs';
-import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-user-list',
@@ -12,14 +11,7 @@ export class UserListComponent implements OnInit {
   users: { [userId: number]: User } = {};
   conversations$: Observable<Conversation[]>;
 
-  usersTypeForm: FormGroup;
-  UserTypes = UsersTypes;
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private userService: UserService,
-    private conversationService: ConversationService
-  ) {}
+  constructor(private userService: UserService, private conversationService: ConversationService) {}
 
   ngOnInit() {
     this.conversations$ = this.conversationService.getConversations();
@@ -29,20 +21,6 @@ export class UserListComponent implements OnInit {
       users.forEach(user => {
         this.users[user.userId] = user;
       });
-    });
-
-    this.createForm();
-  }
-
-  createForm() {
-    this.usersTypeForm = this.formBuilder.group({
-      usersType: this.UserTypes.Patients
-    });
-  }
-
-  resetForm() {
-    this.usersTypeForm.reset({
-      usersType: this.UserTypes.Patients
     });
   }
 }

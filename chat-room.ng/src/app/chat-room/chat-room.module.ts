@@ -6,13 +6,21 @@ import { ChatRoomComponent } from './components/chat-room/chat-room.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
 import { UserListComponent } from './components/user-list/user-list.component';
-import { NgbButtonsModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbButtonsModule, NgbModalModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AvatarComponent } from './components/avatar/avatar.component';
 
 @NgModule({
   declarations: [ChatRoomComponent, ChatComponent, UserDetailComponent, UserListComponent, AvatarComponent],
-  imports: [ReactiveFormsModule, AngularFontAwesomeModule, NgbButtonsModule, CommonModule, ChatRoomRoutingModule]
+  imports: [
+    ReactiveFormsModule,
+    AngularFontAwesomeModule,
+    NgbButtonsModule,
+    NgbModalModule,
+    NgbTypeaheadModule,
+    CommonModule,
+    ChatRoomRoutingModule
+  ]
 })
 export class ChatRoomModule {}

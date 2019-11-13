@@ -1,8 +1,69 @@
 <div class="d-flex flex-grow-1">
-  <div class="d-flex flex-column w-50 user-list">
-    <app-user-list></app-user-list>
+  <div class="d-flex flex-column w-50 px-4 user-list">
+    <form [formGroup]="usersTypeForm" class="mt-4">
+      <div class="btn-group btn-group-toggle d-flex" ngbRadioGroup name="usersType" formControlName="usersType">
+        <label ngbButtonLabel class="btn-outline-primary w-50">
+          <input ngbButton type="radio" [value]="UserTypes.Patients" />Patients</label
+        >
+        <label ngbButtonLabel class="btn-outline-primary w-50">
+          <input ngbButton type="radio" [value]="UserTypes.Doctors" />Colleagues</label
+        >
+      </div>
+    </form>
+    <div class="d-flex align-items-center mt-3">
+      <a class="h6 flex-grow-1 m-0">
+        Latest First
+        <fa name="chevron-down"></fa>
+      </a>
+      <button class="btn btn-primary rounded-circle shadow-sm plus" type="button" (click)="open(content)">
+        <fa name="plus"></fa>
+      </button>
+    </div>
+    <app-user-list class="mt-2" *ngIf="usersTypeForm.controls['usersType'].value === UserTypes.Doctors"></app-user-list>
   </div>
   <div class="d-flex flex-column flex-grow-1">
     <router-outlet></router-outlet>
   </div>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New Conversation</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="chatForm" autocomplete="off" (ngSubmit)="start()" (keyup.enter)="start()">
+      <div class="form-group">
+        <label for="user" class="small">User:</label>
+        <div class="input-group">
+          <input
+            id="user"
+            type="text"
+            class="form-control"
+            [ngbTypeahead]="search"
+            [inputFormatter]="formatter"
+            [resultFormatter]="formatter"
+            [editable]="false"
+            formControlName="user"
+            autofocus
+          />
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button">
+              <fa name="comments"></fa>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div [hidden]="!errorMessage" class="alert alert-danger mt-4 small text-center">
+        {{ errorMessage }}
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary px-4" [disabled]="chatForm.invalid" (click)="start()">
+      Start
+    </button>
+  </div>
+</ng-template>

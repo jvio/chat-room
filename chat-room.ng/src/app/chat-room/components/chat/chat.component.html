@@ -1,5 +1,5 @@
 <div class="d-flex flex-column flex-grow-1 justify-content-end chat shadow-sm position-relative">
-  <a routerLink="../" class="btn close rounded-circle shadow-sm position-absolute mt-2 mr-4 text-center" type="button">
+  <a routerLink="../" class="btn close rounded-circle shadow-sm position-absolute mt-2 mr-4 text-center">
     <h2 class="m-0 font-weight-light">&times;</h2>
   </a>
   <div *ngIf="conversation$ | async as conversation" class="d-flex flex-column flex-grow-1 mt-4">
@@ -7,10 +7,10 @@
       <div class="d-flex" *ngFor="let userId of conversation.users">
         <div class="d-flex align-items-center" *ngIf="users[userId] as user">
           <app-avatar [user]="user"></app-avatar>
-          <h4 class="mx-2 my-0">
+          <h5 class="mx-2 my-0">
             <span>{{ user.firstName }} </span>
             <span>{{ user.lastName }}</span>
-          </h4>
+          </h5>
         </div>
       </div>
     </div>

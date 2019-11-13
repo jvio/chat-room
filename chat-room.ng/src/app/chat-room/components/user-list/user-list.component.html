@@ -1,38 +1,26 @@
-<div class="d-flex flex-column flex-grow-1 px-4">
-  <form [formGroup]="usersTypeForm" class="mt-4">
-    <div class="btn-group btn-group-toggle d-flex" ngbRadioGroup name="usersType" formControlName="usersType">
-      <label ngbButtonLabel class="btn-outline-primary w-50">
-        <input ngbButton type="radio" [value]="UserTypes.Patients" />Patients</label
+<div class="d-flex flex-column flex-grow-1">
+  <div *ngFor="let conversation of conversations$ | async" class="mt-2 conversation">
+    <div *ngIf="conversation.messages[conversation.messages.length - 1] as message">
+      <a
+        [routerLink]="'' + conversation.conversationId"
+        routerLinkActive="active shadow-lg"
+        *ngIf="users[message.userId] as user"
+        class="d-flex px-3 py-4 shadow-sm bg-white"
       >
-      <label ngbButtonLabel class="btn-outline-primary w-50">
-        <input ngbButton type="radio" [value]="UserTypes.Doctors" />Colleagues</label
-      >
-    </div>
-  </form>
-  <div class="mt-4">
-    <div *ngFor="let conversation of conversations$ | async" class="mt-2 conversation">
-      <div *ngIf="conversation.messages[conversation.messages.length - 1] as message">
-        <a
-          [routerLink]="'' + conversation.conversationId"
-          routerLinkActive="active shadow-lg"
-          *ngIf="users[message.userId] as user"
-          class="d-flex px-3 py-4 shadow-sm bg-white"
-        >
-          <app-avatar [user]="user"></app-avatar>
-          <div class="flex-grow-1 ml-3">
-            <div class="d-flex">
-              <h5 class="flex-grow-1">
-                <span class="text-capitalize">{{ user.firstName }} </span>
-                <span class="text-capitalize">{{ user.lastName }}</span>
-              </h5>
-              <div class="text-muted small">{{ message.sentDate | date }}</div>
-            </div>
-            <p>
-              {{ message.content }}
-            </p>
+        <app-avatar [user]="user"></app-avatar>
+        <div class="flex-grow-1 ml-3">
+          <div class="d-flex">
+            <h5 class="flex-grow-1">
+              <span class="text-capitalize">{{ user.firstName }} </span>
+              <span class="text-capitalize">{{ user.lastName }}</span>
+            </h5>
+            <div class="text-muted small">{{ message.sentDate | date }}</div>
           </div>
-        </a>
-      </div>
+          <p>
+            {{ message.content }}
+          </p>
+        </div>
+      </a>
     </div>
   </div>
 </div>
