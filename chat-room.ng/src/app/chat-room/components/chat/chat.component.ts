@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit, OnDestroy {
-  susbcription: Subscription = new Subscription();
+  subscription: Subscription = new Subscription();
   chatForm: FormGroup;
   errorMessage: string;
 
@@ -27,7 +27,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.susbcription.add(
+    this.subscription.add(
       this.activatedRoute.params.subscribe(params => {
         this.conversationId = +params.id;
         this.conversation$ = this.conversationService.getConversationById(this.conversationId);
@@ -45,7 +45,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.susbcription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   createForm() {

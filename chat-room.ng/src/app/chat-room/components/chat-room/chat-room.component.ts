@@ -1,23 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ConversationService, User, UserService } from '../../../api';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersTypes } from '../user-list/user-list.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat-room',
   templateUrl: './chat-room.component.html',
   styleUrls: ['./chat-room.component.scss']
 })
-export class ChatRoomComponent implements OnInit {
+export class ChatRoomComponent implements OnInit, OnDestroy {
+  subscription: Subscription = new Subscription();
   usersTypeForm: FormGroup;
   UserTypes = UsersTypes;
   chatForm: FormGroup;
   users: User[];
   errorMessage: string;
+  modal: NgbModalRef;
 
   formatter = (user: User) => (user ? `${user.firstName} ${user.lastName}` : '');
 
@@ -35,6 +37,7 @@ export class ChatRoomComponent implements OnInit {
     private modalService: NgbModal,
     private fb: FormBuilder,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private userService: UserService,
     private conversationService: ConversationService
   ) {}
@@ -46,6 +49,10 @@ export class ChatRoomComponent implements OnInit {
 
     this.createUsersTypeForm();
     this.createChatForm();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   createChatForm() {
@@ -61,7 +68,7 @@ export class ChatRoomComponent implements OnInit {
   }
 
   open(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+    this.modal = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
   }
 
   start() {
@@ -73,8 +80,9 @@ export class ChatRoomComponent implements OnInit {
           users: [model.user.userId]
         })
         .subscribe(
-          conversation => () => {
-            this.router.navigate([conversation.conversationId]);
+          conversation => {
+            this.router.navigate([conversation.conversationId], { relativeTo: this.activatedRoute });
+            this.modal.dismiss();
           },
           error => {
             this.errorMessage = error.statusText;

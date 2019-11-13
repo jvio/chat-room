@@ -12,14 +12,20 @@ namespace chat_room.web.Data.Extensions
                 ConversationId = c.ConversationId
             };
 
-            conversation.UserConversations.AddRange(
-                c.Users.Select(u => new UserConversation
-                {
-                    ConversationId = c.ConversationId, UserId = u
-                }));
+            if (c.Users != null)
+            {
+                conversation.UserConversations.AddRange(
+                    c.Users.Select(u => new UserConversation
+                    {
+                        Conversation = conversation, 
+                        UserId = u
+                    }));
+            }
             
-            
-            conversation.Messages.AddRange(c.Messages.Select(m => m.ToMessage()));
+            if (c.Messages != null)
+            {
+                conversation.Messages.AddRange(c.Messages.Select(m => m.ToMessage()));
+            }
 
             return conversation;
         }

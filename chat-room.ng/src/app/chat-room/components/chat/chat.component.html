@@ -34,7 +34,13 @@
     </div>
   </div>
   <div class="bg-white shadow">
-    <form [formGroup]="chatForm" class="d-flex flex-column py-2 px-4" (ngSubmit)="send()" (keyup.enter)="send()">
+    <form
+      [formGroup]="chatForm"
+      class="d-flex flex-column py-2 px-4"
+      autocomplete="off"
+      (ngSubmit)="send()"
+      (keyup.enter)="send()"
+    >
       <div class="d-flex content-container position-relative">
         <div class="form-group m-0 w-100">
           <input
