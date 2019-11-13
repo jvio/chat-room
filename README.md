@@ -14,7 +14,7 @@ The following demo tries to accomplish the following:
  
 ## Requirements
 
-For this application I wanted to cover the following user stories:
+For this application, wanted to cover the following user stories:
 
 * Allow user to login.
 * Allow user to register.
@@ -93,7 +93,7 @@ https://chat-room.azurewebsites.net/swagger
   
 ### IDE
 
-I am using jetbrains products, just in case:
+Using jetbrains products, just in case:
 
 * project rider for backend:
 
@@ -125,7 +125,7 @@ dotnet and node will start running along side handle backend and client respecti
 
 ## Features
 
-Some features I will like to detail about how this is built.
+Some features detailed about how this is built.
 
 ### Backend
 
@@ -148,21 +148,21 @@ Using entity framework for db context, and using a code first approach to genera
 
 #### Encryption
 
-I am using simple encryption for storing passwords in the db using open sourced Bouncy Castle library.
+Using simple encryption for storing passwords in the db using open sourced Bouncy Castle library.
 
 #### SignalR
 
-I am using signalR to do push notifications to the client when a new message or conversation happens.
+Using signalR to do push notifications to the client when a new message or conversation happens.
 
 #### SPA services
 
-I am using spa services to create a bridge between node runtime and dotnet runtime and quickly host the angular solution in the web server.
+Using spa services to create a bridge between node runtime and dotnet runtime and quickly host the angular solution in the web server.
 
 ### Frontend
 
 #### Swagger
 
-I am using swagger and open api tools for:
+Using swagger and open api tools for:
 
 * Documentation of the open api endpoints, you can take a look here also:
 
@@ -236,7 +236,7 @@ npm run start:swagger
 
 #### Devops
 
-I am using an azure account to create a pipeline that uses all the mentioned tech stack, and created:
+Using an azure account to create a pipeline that uses all the mentioned tech stack, and created:
 
 - CI/CD for getting a new build/release on each check in.
 
@@ -248,4 +248,4 @@ Wanted to provide an application that could be used in medical environments, so 
 
 https://dribbble.com/shots/7150708-iPad-Hospital-App-chat/attachments/155008?mode=media
 
-I created a bootstrap theme that accommodates for it.
+Created a bootstrap theme that accommodates for it.
