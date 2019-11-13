@@ -1,12 +1,10 @@
 <div class="d-flex flex-column"></div>
 
 <header class="d-flex border-bottom">
-  <a routerLink="/" class="px-5 py-4">
-    Logo
+  <a routerLink="/" class="mx-3 px-5 py-3">
+    <fa name="user-md" class="text-secondary" size="3x"></fa>
   </a>
-  <div class="flex-grow-1 px-5 py-4">
-    <input />
-  </div>
+  <div class="flex-grow-1 px-5 py-4 border-left"></div>
   <a routerLink="profile" class="p-4 border-left">
     My Profile
   </a>
@@ -17,13 +15,35 @@
 
 <main class="d-flex flex-grow-1">
   <div class="d-flex flex-column nav">
-    <a routerLink="schedule" routerLinkActive="active" class="px-5 py-4 ">
-      <fa name="calendar"></fa>
-      Schedule
+    <a
+      routerLink="schedule"
+      routerLinkActive="active"
+      class="d-flex flex-column align-items-center justify-content-center px-5 py-4"
+    >
+      <fa name="calendar" size="2x"></fa>
+
+      <span class="mt-1">Schedule</span>
     </a>
-    <a routerLink="chat-room" routerLinkActive="active" class="px-5 py-4">Facility</a>
-    <a routerLink="lab" routerLinkActive="active" class="px-5 py-4">Lab</a>
-    <a routerLink="protocol" routerLinkActive="active" class="px-5 py-4">Protocol</a>
+    <a
+      routerLink="chat-room"
+      routerLinkActive="active"
+      class="d-flex flex-column align-items-center justify-content-center px-5 py-4"
+    >
+      <fa name="comment" size="2x"></fa>
+      <span class="mt-1">Chat</span>
+    </a>
+    <a
+      routerLink="lab"
+      routerLinkActive="active"
+      class="d-flex flex-column align-items-center justify-content-center px-5 py-4"
+      ><fa name="briefcase" size="2x"></fa> <span class="mt-1">Lab</span></a
+    >
+    <a
+      routerLink="protocol"
+      routerLinkActive="active"
+      class="d-flex flex-column align-items-center justify-content-center px-5 py-4"
+      ><fa name="book" size="2x"></fa> <span class="mt-1">Protocol</span></a
+    >
   </div>
   <div class="d-flex flex-column flex-grow-1 main">
     <router-outlet></router-outlet>

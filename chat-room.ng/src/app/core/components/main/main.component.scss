@@ -6,16 +6,21 @@
   flex-grow: 1;
 }
 
-a {
-  color: $gray-700;
+header {
+  a {
+    color: $gray-700;
+  }
 }
 
 .nav {
   a {
     color: $gray-500;
     &.active {
-      color: $black;
+      color: $gray-800;
       font-weight: bold;
+      fa {
+        color: $primary;
+      }
     }
   }
 }
