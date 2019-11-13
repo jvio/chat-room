@@ -20,12 +20,17 @@
           <div
             *ngFor="let message of conversation.messages"
             class="px-5 pt-4 message"
-            [class.align-self-end]="message.userId == 1"
+            [class.align-self-end]="message.userId == user.userId"
+            [class.align-self-start]="message.userId != user.userId"
           >
-            <div class="ballon py-4 px-5 shadow" [class.mine]="message.userId == 1">
+            <div class="ballon py-4 px-5 shadow" [class.mine]="message.userId == user.userId">
               {{ message.content }}
             </div>
-            <div class="small mt-1 px-3 text-black-50" [class.text-right]="message.userId == 1">
+            <div
+              class="small mt-1 px-3 text-black-50"
+              [class.text-right]="message.userId == user.userId"
+              [class.text-left]="message.userId != user.userId"
+            >
               {{ message.sentDate | date }}
             </div>
           </div>

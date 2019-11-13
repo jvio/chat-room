@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../api';
 import { Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { SessionKeys, StateService } from '../../../core/services/state/state.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,12 @@ export class LoginComponent implements OnInit {
 
   errorMessage: string;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private router: Router,
+    private stateService: StateService
+  ) {}
 
   ngOnInit() {
     this.createForm();
@@ -32,7 +37,8 @@ export class LoginComponent implements OnInit {
       this.errorMessage = '';
       const model = this.authForm.value;
       this.userService.loginUser(model.username, model.password).subscribe(
-        () => {
+        user => {
+          this.stateService.set(SessionKeys.Username, model.username);
           this.router.navigate(['/']);
         },
         error => {
