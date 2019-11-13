@@ -8,6 +8,7 @@
     "start:web": "ng serve --configuration=web",
     "build": "ng build",
     "build:prod": "ng build --prod",
+    "build:web": "ng build --configuration=web",
     "build:web:prod": "ng build --configuration=web-production",
     "test": "ng test",
     "lint": "ng lint",

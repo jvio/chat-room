@@ -327,6 +327,21 @@ paths:
       responses:
         default:
           description: 'successful operation'
+  /users/logged:
+    x-swagger-router-controller: users
+    get:
+      tags:
+        - 'user'
+      summary: 'Get user logged'
+      description: ''
+      operationId: 'getUserLogged'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/User'
+        404:
+          description: 'User not found'
   /users/{username}:
     x-swagger-router-controller: users
     get:

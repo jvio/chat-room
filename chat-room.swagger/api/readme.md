@@ -337,6 +337,23 @@ Logs out current logged in user session
 | ------- | -------------------- |
 | default | successful operation |
 
+### /users/logged
+
+#### GET
+
+##### Summary:
+
+Get user logged
+
+##### Description:
+
+##### Responses
+
+| Code | Description          | Schema        |
+| ---- | -------------------- | ------------- |
+| 200  | successful operation | [User](#user) |
+| 404  | User not found       |               |
+
 ### /users/{username}
 
 #### GET

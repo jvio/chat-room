@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
       const model = this.authForm.value;
       this.userService.loginUser(model.username, model.password).subscribe(
         user => {
-          this.stateService.set(SessionKeys.Username, model.username);
           this.router.navigate(['/']);
         },
         error => {

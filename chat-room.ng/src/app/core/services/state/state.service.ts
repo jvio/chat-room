@@ -22,6 +22,5 @@ export class StateService {
 }
 
 export enum SessionKeys {
-  Username = 1,
   User = 2
 }

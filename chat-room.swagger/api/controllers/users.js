@@ -8,6 +8,7 @@ module.exports = {
   getUsers: getUsers,
   loginUser: loginUser,
   logoutUser: logoutUser,
+  getUserLogged: getUserLogged,
   getUserByName: getUserByName
 };
 
@@ -16,6 +17,10 @@ function getUsers(req, res) {
 }
 
 function getUserByName(req, res) {
+  res.json(users.users[0]);
+}
+
+function getUserLogged(req, res) {
   res.json(users.users[0]);
 }
 

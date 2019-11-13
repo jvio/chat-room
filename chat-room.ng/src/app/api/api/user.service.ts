@@ -168,6 +168,38 @@ export class UserService {
     }
 
     /**
+     * Get user logged
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getUserLogged(observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public getUserLogged(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public getUserLogged(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public getUserLogged(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        const httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected !== undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+
+        return this.httpClient.get<User>(`${this.configuration.basePath}/users/logged`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Get users
      * Returns all users
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.

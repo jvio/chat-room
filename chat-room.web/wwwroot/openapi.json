@@ -462,7 +462,8 @@
         },
         "summary" : "Logs user into the system",
         "tags" : [ "user" ]
-      }
+      },
+      "x-swagger-router-controller" : "users"
     },
     "/users/logout" : {
       "get" : {
@@ -475,7 +476,32 @@
         },
         "summary" : "Logs out current logged in user session",
         "tags" : [ "user" ]
-      }
+      },
+      "x-swagger-router-controller" : "users"
+    },
+    "/users/logged" : {
+      "get" : {
+        "operationId" : "getUserLogged",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/User"
+                }
+              }
+            },
+            "description" : "successful operation"
+          },
+          "404" : {
+            "content" : { },
+            "description" : "User not found"
+          }
+        },
+        "summary" : "Get user logged",
+        "tags" : [ "user" ]
+      },
+      "x-swagger-router-controller" : "users"
     },
     "/users/{username}" : {
       "delete" : {
@@ -573,7 +599,8 @@
         "summary" : "Updated user",
         "tags" : [ "user" ],
         "x-codegen-request-body-name" : "body"
-      }
+      },
+      "x-swagger-router-controller" : "users"
     },
     "/swagger" : {
       "x-swagger-pipe" : "swagger_raw"

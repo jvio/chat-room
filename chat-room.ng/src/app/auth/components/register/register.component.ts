@@ -52,7 +52,6 @@ export class RegisterComponent implements OnInit {
         )
         .subscribe(
           () => {
-            this.stateService.set(SessionKeys.Username, model.username);
             this.router.navigate(['/']);
           },
           error => {

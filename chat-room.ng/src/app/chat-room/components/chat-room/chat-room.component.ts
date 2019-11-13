@@ -56,6 +56,12 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     });
   }
 
+  resetChatForm() {
+    this.chatForm.reset({
+      user: ''
+    });
+  }
+
   createUsersTypeForm() {
     this.usersTypeForm = this.fb.group({
       usersType: this.UserTypes.Doctors
@@ -64,6 +70,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
 
   open(content) {
     this.modal = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+    this.resetChatForm();
     this.userService.getUsers().subscribe(users => {
       this.users = users;
     });
