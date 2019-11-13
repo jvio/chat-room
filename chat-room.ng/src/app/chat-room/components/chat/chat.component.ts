@@ -98,7 +98,9 @@ export class ChatComponent implements OnInit, OnDestroy {
           conversationId: this.conversationId
         })
         .subscribe(
-          () => {},
+          message => {
+            this.conversation.messages.push(message);
+          },
           error => {
             this.errorMessage = error.statusText;
           }

@@ -54,6 +54,26 @@ namespace chat_room.web.Controllers
         }
         
         [HttpGet]
+        [Route("/users/logged")]
+        public async Task<ActionResult<User>> GetUserLogged()
+        { 
+            var userId = HttpContext.Session.GetInt64("userId");
+            if (userId == null)
+            {
+                return NotFound();
+            }
+            
+            var user = await _db.Users.FindAsync(userId);
+            
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user.ToUser();
+        }
+        
+        [HttpGet]
         [Route("/users")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         { 
